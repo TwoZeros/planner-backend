@@ -29,7 +29,7 @@ namespace Planner.Controllers
         [HttpGet]
         public async Task<IActionResult> GetGroupSkills()
         {
-            var groupskills=await  _context.GroupSkills.ToListAsync();
+            var groupskills = await _context.GroupSkills.ToListAsync();
             return new JsonResult(_groupMapper.Map<List<GroupSkill>, List<GroupSkillDto>>(groupskills));
         }
 

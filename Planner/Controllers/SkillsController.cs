@@ -36,21 +36,21 @@ namespace Planner.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult> GetById(int id)
         {
-            var product = await _skillService.GetById(id);
+            var skill = await _skillService.GetById(id);
 
-            if (product == null)
+            if (skill == null)
             {
                 return NotFound();
             }
 
-            return new JsonResult(product);
+            return new JsonResult(skill);
         }
 
         // PUT: api/Products/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProduct(int id, Skill skill)
+        public async Task<IActionResult> PutSkill(int id, Skill skill)
         {
             if (id != skill.Id)
             {
@@ -65,7 +65,7 @@ namespace Planner.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProductExists(id))
+                if (!SkillExists(id))
                 {
                     return NotFound();
                 }
@@ -82,7 +82,7 @@ namespace Planner.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct(Skill skill)
+        public async Task<ActionResult<Skill>> PostSkill(Skill skill)
         {
 
             await _skillService.Add(skill);
@@ -92,7 +92,7 @@ namespace Planner.Controllers
 
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Product>> DeleteProduct(int id)
+        public async Task<ActionResult<Skill>> DeleteSkill(int id)
         {
             var status = await _skillService.Delete(id);
             if (status == null)
@@ -103,9 +103,9 @@ namespace Planner.Controllers
             return new JsonResult(status);
         }
 
-        private bool ProductExists(int id)
+        private bool SkillExists(int id)
         {
-            return _context.Products.Any(e => e.Id == id);
+            return _context.Skills.Any(e => e.Id == id);
         }
     }
 }
