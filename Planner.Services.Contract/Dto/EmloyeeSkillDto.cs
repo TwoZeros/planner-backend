@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Planner.Services.Contract.Dto
 {
-    public class EmployeeSkillsDto
+    public class EmployeeSkillDto
     {
         public int Id { get; set; }
         public int EmployeeId { get; set; }
@@ -12,6 +12,8 @@ namespace Planner.Services.Contract.Dto
         public int KnowledgeLevelId { get; set; }
         public DateTime DateOfAppointment { get; set; }
         public string SkillName { get; set; }
+
+        public string SkillGroupName { get; set; }
         public string KnowledgeLevelName { get; set; }
     }
 }

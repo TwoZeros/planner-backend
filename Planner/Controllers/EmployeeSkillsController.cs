@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Planner.Data;
 using Planner.Models;
+using Planner.Services.Contract.Dto;
+using Planner.Services.Infrastructure.Mappers;
 
 namespace Planner.Controllers
 {
@@ -15,9 +17,10 @@ namespace Planner.Controllers
     public class EmployeeSkillsController : ControllerBase
     {
         private readonly PlannerDbContext _context;
-
-        public EmployeeSkillsController(PlannerDbContext context)
+        private readonly IEmployeeSkillDetailMapper _employeeSkillMapper;
+        public EmployeeSkillsController(PlannerDbContext context, IEmployeeSkillDetailMapper employeeSkillMapper)
         {
+            _employeeSkillMapper = employeeSkillMapper;
             _context = context;
         }
 
@@ -25,7 +28,9 @@ namespace Planner.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EmployeeSkill>>> GetEmployeeSkills()
         {
-            return await _context.EmployeeSkills.ToListAsync();
+            var emoloyeeSkills = await _context.EmployeeSkills.Include(p => p.Skill).ThenInclude(p=> p.GroupSkill).Include(p=>p.Employee).Include(p=>p.KnowledgeLevel).ToListAsync();
+            var employeeSkillsDto = _employeeSkillMapper.Map<List<EmployeeSkill>, List<EmployeeSkillDto>>(emoloyeeSkills);
+            return new JsonResult(employeeSkillsDto);
         }
 
         // GET: api/EmployeeSkills/5

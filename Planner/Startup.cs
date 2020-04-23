@@ -60,7 +60,7 @@ namespace Planner
             services.AddTransient<IEmployeeListMapper, EmployeeListMapper>();
             services.AddTransient<ISkillDetailMapper, SkillDetailMapper>();
             services.AddTransient<IGroupSkillMapper, GroupSkillMapper>();
-
+            services.AddTransient<IEmployeeSkillDetailMapper, EmployeeSkillDetailMapper>();
             services.AddTransient<IClientListMapper, ClientListMapper>();
             services.AddTransient<IClientDetailMapper, ClientDetailMapper>();
             services.AddTransient<ICommentListMapper, CommentListMapper>();

@@ -10,6 +10,5 @@ namespace Planner.Services.Contract.Dto
         public string Name { get; set; }
 
         public string GroupName { get; set; }
-    //    public GroupSkillDto GroupSkill { get; set; }
     }
 }
