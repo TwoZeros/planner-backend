@@ -55,8 +55,12 @@ namespace Planner
 
             // Mappers
             services.AddTransient<IOrderMapper, OrderMapper>();
+            
             services.AddTransient<IEmployeeDetailMapper, EmployeeDetailMapper>();
             services.AddTransient<IEmployeeListMapper, EmployeeListMapper>();
+            services.AddTransient<ISkillDetailMapper, SkillDetailMapper>();
+            services.AddTransient<IGroupSkillMapper, GroupSkillMapper>();
+
             services.AddTransient<IClientListMapper, ClientListMapper>();
             services.AddTransient<IClientDetailMapper, ClientDetailMapper>();
             services.AddTransient<ICommentListMapper, CommentListMapper>();

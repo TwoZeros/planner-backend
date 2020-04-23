@@ -13,6 +13,7 @@ namespace Planner.Data.Infrastructure
             services.AddTransient<ILogRepository, LogRepository>();
             services.AddTransient<IAuthorizationRepository, AuthorizationRepository>();
             services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+            services.AddTransient<ISkillRepository, SkillRepository>();
             services.AddTransient<IClientRepository, ClientRepository>();
             services.AddTransient<ICarmaRepository, CarmaRepository>();
             services.AddTransient<IEmployeePositionRepository, EployeePositionRepository>();

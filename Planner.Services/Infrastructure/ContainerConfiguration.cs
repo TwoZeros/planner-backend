@@ -16,6 +16,7 @@ namespace Planner.Services.Infrastructure
             services.AddTransient<ILoggerService, LoggerService>();
             services.AddTransient<IAuthorizationService, AuthorizationService>();
             services.AddTransient<IEmployeeService, EmployeeService>();
+            services.AddTransient<ISkillService, SkillService>();
             services.AddTransient<IClientService, ClientService>();
 
             services.AddTransient<ICarmaUser, CarmaUserService>(); 

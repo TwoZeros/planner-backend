@@ -21,7 +21,14 @@ namespace Planner.Models
         public string Email { get; set; }
         public DateTime CreatedDate { get; set; }
 
+        public virtual List<EmployeeSkill> EmployeeSkill { get; set; }
 
+        public Employee()
+        {
+            Position = new Position();
+            User = new User();
+            EmployeeSkill = new List<EmployeeSkill>();
+        }
 
     }
 }

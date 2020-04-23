@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Planner.Data;
 
 namespace Planner.Data.Migrations
 {
     [DbContext(typeof(PlannerDbContext))]
-    partial class PlannerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200422125030_skills")]
+    partial class skills
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -406,7 +408,7 @@ namespace Planner.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("GroupSkillId")
+                    b.Property<int?>("GroupSkillId")
                         .HasColumnType("int");
 
                     b.Property<int?>("KnowledgeLevelId")
@@ -559,10 +561,8 @@ namespace Planner.Data.Migrations
             modelBuilder.Entity("Planner.Models.Skill", b =>
                 {
                     b.HasOne("Planner.Models.GroupSkill", "GroupSkill")
-                        .WithMany("Skill")
-                        .HasForeignKey("GroupSkillId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Skills")
+                        .HasForeignKey("GroupSkillId");
 
                     b.HasOne("Planner.Models.KnowledgeLevel", null)
                         .WithMany("Skills")

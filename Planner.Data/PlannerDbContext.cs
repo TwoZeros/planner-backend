@@ -39,8 +39,15 @@ namespace Planner.Data
                 new Position { Id=4, Name="Повар", IsAllowedDelete=false},
 
                });
+            builder.Entity<KnowledgeLevel>().HasData(
+               new KnowledgeLevel[]
+               {
+                new KnowledgeLevel { Id=1, Name="Junior"},
+                new KnowledgeLevel { Id=2, Name="Middle"},
+                new KnowledgeLevel { Id=3, Name="Senior"},
+                });
 
- 
+
         }
 
         public DbSet<LogEntry> Logs { get; set; }
@@ -48,6 +55,11 @@ namespace Planner.Data
        
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Position> Positions { get; set; }
+
+        public DbSet<Skill> Skills { get; set; }
+        public DbSet<GroupSkill> GroupSkills { get; set; }
+        public DbSet<KnowledgeLevel> KnowledgeLevel { get; set; }
+        public DbSet<EmployeeSkill> EmployeeSkills { get; set; }
         public DbSet<Client> Clients { get; set; }
 
         public DbSet<CarmaUser> CarmaUsers { get; set; }
