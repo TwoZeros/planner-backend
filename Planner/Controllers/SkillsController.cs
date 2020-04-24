@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Planner.Data;
+using Planner.Dto.Models;
 using Planner.Models;
 using Planner.Services.Contract;
 using Planner.Services.Contract.Dto;
@@ -18,11 +20,12 @@ namespace Planner.Controllers
     {
         private readonly PlannerDbContext _context;
         private readonly ISkillService _skillService;
-
-        public SkillsController(PlannerDbContext context, ISkillService skillService)
+        private readonly IMapper _mapper;
+        public SkillsController(PlannerDbContext context, IMapper mapper, ISkillService skillService)
         {
             _context = context;
             _skillService = skillService;
+            _mapper = mapper;
         }
 
         // GET: api/Skills
@@ -50,13 +53,13 @@ namespace Planner.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSkill(int id, Skill skill)
+        public async Task<IActionResult> PutSkill(int id, [FromBody]SkillModel model)
         {
-            if (id != skill.Id)
+            if (id != model.Id )
             {
                 return BadRequest();
             }
-
+            var skill = _mapper.Map<SkillModel, Skill>(model);
             _skillService.Update(skill);
 
             try
@@ -82,9 +85,9 @@ namespace Planner.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Skill>> PostSkill(Skill skill)
+        public async Task<ActionResult<Skill>> PostSkill([FromBody]SkillModel model)
         {
-
+            var skill = _mapper.Map<SkillModel, Skill>(model);
             await _skillService.Add(skill);
 
             return CreatedAtAction("GetById", new { id = skill.Id }, skill);

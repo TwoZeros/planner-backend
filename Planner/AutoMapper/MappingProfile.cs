@@ -21,10 +21,13 @@ namespace Planner.AutoMapper
 
   
 
-            CreateMap<Employee, EmployeeDetailDto>();
-                //.ForMember(x => x.EmployeeContact, s => s.MapFrom( u => u.EmployeeContact));
+            CreateMap<SkillModel, Skill>();
 
+            CreateMap<EmployeeSkillModel, EmployeeSkill>();
 
+            CreateMap<GroupSkillModel, GroupSkill>();
+
+            CreateMap<EmployeeModel, Employee>();
         }
     }
 }

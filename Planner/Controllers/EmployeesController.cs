@@ -11,6 +11,7 @@ using Planner.Dto.Models;
 using Planner.Services.Contract;
 using Planner.Services.Contract.Dto;
 using Microsoft.AspNetCore.Authorization;
+using AutoMapper;
 
 namespace Planner.Controllers
 {
@@ -20,10 +21,12 @@ namespace Planner.Controllers
     {
         private readonly PlannerDbContext _context;
         private readonly IEmployeeService _employeeService;
-        public EmployeesController(PlannerDbContext context, IEmployeeService employeeService)
+        private readonly IMapper _mapper;
+        public EmployeesController(PlannerDbContext context, IMapper mapper,IEmployeeService employeeService)
         {
             _context = context;
             _employeeService = employeeService;
+            _mapper = mapper;
         }
 
         // GET: api/Employees
@@ -50,11 +53,11 @@ namespace Planner.Controllers
 
         // PUT: api/Employees/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEmployee(int id, Employee employee)
+        public async Task<IActionResult> PutEmployee(int id, EmployeeModel model)
         {
-            if (id != employee.Id)
+            if (id != model.Id)
                 return BadRequest();
-
+            var employee = _mapper.Map<EmployeeModel, Employee>(model);
             _employeeService.PutEmployee(id, employee);
 
             try
@@ -106,8 +109,9 @@ namespace Planner.Controllers
         // POST: api/Employees
 
         [HttpPost]
-        public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
+        public async Task<ActionResult<Employee>> PostEmployee(EmployeeModel model)
         {
+            var employee = _mapper.Map<EmployeeModel, Employee>(model);
            await _employeeService.AddEmployee(employee);
 
             return CreatedAtAction("GetEmployee", new { id = employee.Id }, employee);

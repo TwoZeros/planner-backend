@@ -47,6 +47,7 @@ namespace Planner
                 mc.AddProfile(new MappingProfile());
             });
 
+            //SingltonMapper
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
 

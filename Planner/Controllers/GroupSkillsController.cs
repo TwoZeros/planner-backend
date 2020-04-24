@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Planner.Data;
+using Planner.Dto.Models;
 using Planner.Models;
 using Planner.Services.Contract.Dto;
 using Planner.Services.Infrastructure.Mappers;
@@ -18,11 +20,13 @@ namespace Planner.Controllers
     {
         private readonly PlannerDbContext _context;
         private readonly IGroupSkillMapper _groupMapper;
+        private readonly IMapper _mapper;
 
-        public GroupSkillsController(PlannerDbContext context, IGroupSkillMapper groupMapper)
+        public GroupSkillsController(PlannerDbContext context, IMapper mapper,IGroupSkillMapper groupMapper)
         {
             _context = context;
             _groupMapper = groupMapper;
+            _mapper = mapper;
         }
 
         // GET: api/GroupSkills
@@ -51,13 +55,13 @@ namespace Planner.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutGroupSkill(int id, GroupSkill groupSkill)
+        public async Task<IActionResult> PutGroupSkill(int id, GroupSkillModel model)
         {
-            if (id != groupSkill.Id)
+            if (id != model.Id)
             {
                 return BadRequest();
             }
-
+            var groupSkill = _mapper.Map<GroupSkillModel, GroupSkill>(model);
             _context.Entry(groupSkill).State = EntityState.Modified;
 
             try
@@ -83,8 +87,9 @@ namespace Planner.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<GroupSkill>> PostGroupSkill(GroupSkill groupSkill)
+        public async Task<ActionResult<GroupSkill>> PostGroupSkill([FromBody]GroupSkillModel model)
         {
+            var groupSkill = _mapper.Map<GroupSkillModel, GroupSkill>(model);
             _context.GroupSkills.Add(groupSkill);
             await _context.SaveChangesAsync();
 
