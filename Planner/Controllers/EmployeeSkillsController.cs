@@ -53,16 +53,29 @@ namespace Planner.Controllers
 
         // GET: api/EmployeeSkills/employee/5
         [HttpGet("employee/{id}")]
-        public async Task<ActionResult<IEnumerable<EmployeeSkillDto>>> GetSkillsByEmployeeId(int id)
+        public async Task<ActionResult> GetSkillsByEmployeeId(int id)
         {
-            var employeeSkills = await _context.EmployeeSkills.Include(p => p.Skill).ThenInclude(p => p.GroupSkill).Include(p => p.Employee).Include(p => p.KnowledgeLevel).Where(p=>p.EmployeeId==id).ToListAsync();
+            var employeeSkills = await _context.EmployeeSkills
+                                  .Include(p => p.Skill)
+                                  .ThenInclude(p => p.GroupSkill)
+                                  .Include(p => p.Employee)
+                                  .Include(p => p.KnowledgeLevel)
+                                  .Where(p=>p.EmployeeId==id)
+                                    .ToListAsync();
             
             if (employeeSkills == null)
             {
                 return NotFound();
             }
             var employeeSkillsDto = _employeeSkillMapper.Map<List<EmployeeSkill>, List<EmployeeSkillDto>>(employeeSkills);
-            return new JsonResult(employeeSkillsDto);
+
+            var employeeSkill = employeeSkillsDto.GroupBy(p => p.SkillGroupName)
+                        .Select(g => new
+                        {
+                            Name = g.Key,
+                            Skills = g.Select(p => p)
+                        });
+            return new JsonResult(employeeSkill);
         }
 
         // PUT: api/EmployeeSkills/5
