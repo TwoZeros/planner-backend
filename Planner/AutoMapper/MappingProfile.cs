@@ -28,6 +28,30 @@ namespace Planner.AutoMapper
             CreateMap<GroupSkillModel, GroupSkill>();
 
             CreateMap<EmployeeModel, Employee>();
+
+            CreateMap<ProjectModel, Project>();
+
+            CreateMap<ProjectWorkModel, ProjectWork>();
+
+            CreateMap<SkillForProjectWorkModel, SkillForProjectWork>();
+
+            CreateMap<CompanyModel, Company>();
+
+            CreateMap<BranchCompanyModel, BranchCompany>();
+
+            CreateMap<HolidaysModel, Holidays>();
+
+            CreateMap<WorkTimeInSheduleModel, WorkTimeInShedule>();
+
+            CreateMap<SheduleModel, Shedule>();
+
+            CreateMap<LackOfEmployeeModel, LackOfEmployee>();
+
+            CreateMap<LackTimeModel, LackTime>(); 
+
+            CreateMap<EmployeeSheduleModel, EmployeeShedule>();
+
+            CreateMap<EmployeeOnWorkModel, EmployeeOnWork>();
         }
     }
 }

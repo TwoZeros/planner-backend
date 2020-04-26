@@ -16,7 +16,8 @@ namespace Planner.Models
         public GroupSkill GroupSkill { get; set; }
 
         public List<EmployeeSkill> EmployeeSkill { get; set; }
+        public List<SkillForProjectWork> SkillForProjectWork { get; set; }
 
-       
+
     }
 }

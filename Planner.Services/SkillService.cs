@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Planner.Data.Contract.Repositories;
 using Planner.Models;
 using Planner.Services.Contract;
-using Planner.Services.Contract.Base;
 using Planner.Services.Contract.Dto;
 using Planner.Services.Infrastructure.Mappers;
 

@@ -18,6 +18,18 @@ namespace Planner.Services.Infrastructure
             services.AddTransient<IEmployeeService, EmployeeService>();
             services.AddTransient<ISkillService, SkillService>();
             services.AddTransient<IClientService, ClientService>();
+            services.AddTransient<IProjectService, ProjectService>();
+            services.AddTransient<IProjectWorkService, ProjectWorkService>();
+            services.AddTransient<ISkillForProjectWorkService, SkillForProjectWorkService>();
+            services.AddTransient<ICompanyService, CompanyService>();
+            services.AddTransient<IBranchCompanyService, BranchCompanyService>();
+            services.AddTransient<IHolidaysService, HolidaysService>();
+            services.AddTransient<IEmployeeSheduleService, EmployeeSheduleService>();
+            services.AddTransient<ILackOfEmployeeService, LackOfEmployeeService>();
+            services.AddTransient<ILackTimeService, LackTimeService>();
+            services.AddTransient<IWorkTimeInCheduleService, WorkTimeInCheduleService>();
+            services.AddTransient<ISheduleService, SheduleService>();
+            services.AddTransient<IEmployeeOnWorkService, EmployeeOnWorkService>();
 
             services.AddTransient<ICarmaUser, CarmaUserService>(); 
 

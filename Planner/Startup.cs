@@ -60,12 +60,24 @@ namespace Planner
             services.AddTransient<IEmployeeDetailMapper, EmployeeDetailMapper>();
             services.AddTransient<IEmployeeListMapper, EmployeeListMapper>();
             services.AddTransient<ISkillDetailMapper, SkillDetailMapper>();
+            services.AddTransient<ISkillForProjectsWorkDetailMapper, SkillForProjectsWorkDetailMapper>();
             services.AddTransient<IGroupSkillMapper, GroupSkillMapper>();
             services.AddTransient<IEmployeeSkillDetailMapper, EmployeeSkillDetailMapper>();
             services.AddTransient<IClientListMapper, ClientListMapper>();
             services.AddTransient<IClientDetailMapper, ClientDetailMapper>();
             services.AddTransient<ICommentListMapper, CommentListMapper>();
             services.AddTransient<ICommentDetailMapper, CommentDetailMapper>();
+            services.AddTransient<IProjectDetailMapper, ProjectDetailMapper>();
+            services.AddTransient<IProjectWorkDetailMapper, ProjectWorkDetailMapper>();
+            services.AddTransient<IBranchCompanyDetailMapper, BranchCompanyDetailMapper>();
+            services.AddTransient<ICompanyDetailMapper, CompanyDetailMapper>();
+            services.AddTransient<IHolidaysDetailMapper, HolidaysDetailMapper>();
+            services.AddTransient<IWorkTimeInSheduleDetailMapper, WorkTimeInSheduleDetailMapper>();
+            services.AddTransient<ISheduleDetailMapper, SheduleDetailMapper>();
+            services.AddTransient<ILackOfEmployeeDetailMapper, LackOfEmployeeDetailMapper>();
+            services.AddTransient<ILackTimeDetailMapper, LackTimeDetailMapper>(); 
+            services.AddTransient<IEmployeeSheduleDetailMapper, EmployeeSheduleDetailMapper>();
+            services.AddTransient<IEmployeeOnWorkDetailMapper, EmployeeOnWorkDetailMapper>();
 
             // Services
             Services.Infrastructure.ContainerConfiguration.Configure(services);

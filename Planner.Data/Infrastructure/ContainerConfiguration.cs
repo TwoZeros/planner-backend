@@ -21,7 +21,18 @@ namespace Planner.Data.Infrastructure
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddTransient<IProductInOrderRepository, ProductInOrderRepository>();
-
+            services.AddTransient<IProjectRepository, ProjectRepository>();
+            services.AddTransient<IProjectWorkRepository, ProjectWorkRepository>();
+            services.AddTransient<ISkillForProjectsWorkRepository, SkillForProjectsWorkRepository>();
+            services.AddTransient<ICompanyRepository, CompanyRepository>();
+            services.AddTransient<IBranchCompanyRepository, BranchCompanyRepository>();
+            services.AddTransient<IHolidaysRepository, HolidaysRepository>();
+            services.AddTransient<IWorkTimeInCheduleRepository, WorkTimeInCheduleRepository>();
+            services.AddTransient<ISheduleRepository, SheduleRepository>();
+            services.AddTransient<ILackOfEmployeeRepository, LackOfEmployeeRepository>();
+            services.AddTransient<ILackTimeRepository, LackTimeRepository>();
+            services.AddTransient<IEmployeeSheduleRepository, EmployeeSheduleRepository>();
+            services.AddTransient<IEmployeeOnWorkRepository, EmployeeOnWorkRepository>();
         }
-    }
+   }
 }

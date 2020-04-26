@@ -25,6 +25,7 @@ namespace Planner.Data
             builder.ApplyConfiguration(new ClientConfiguration());
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new CommentConfiguration());
+           
             builder.Entity<User>().HasData(
                new User[]
                {
@@ -70,5 +71,17 @@ namespace Planner.Data
         public DbSet<StatusOrder> StatusOrders { get; set; }
         public DbSet<ProductInOrder> ProductInOrders { get; set; }
 
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<ProjectWork> ProjectWorks { get; set; }
+        public DbSet<SkillForProjectWork> SkillForProjectWorks { get; set; }
+        public DbSet<Company> Companys { get; set; }
+        public DbSet<BranchCompany> BranchCompanys { get; set; }
+        public DbSet<Holidays> Holidays { get; set; }
+        public DbSet<WorkTimeInShedule> WorkTimeInChedules { get; set; }
+        public DbSet<Shedule> Shedules { get; set; }
+        public DbSet<LackTime> LackTimes { get; set; }
+        public DbSet<LackOfEmployee> LackOfEmployees { get; set; }
+        public DbSet<EmployeeShedule> EmployeeShedules { get; set; }
+        public DbSet<EmployeeOnWork> EmployeeOnWorks { get; set; }
     }
 }
