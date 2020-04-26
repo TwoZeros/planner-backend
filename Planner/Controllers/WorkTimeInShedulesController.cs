@@ -28,7 +28,8 @@ namespace Planner.Controllers
             _workTimeInSheduleService = workTimeInSheduleService;
             _mapper = mapper;
         }
-
+       
+        [HttpGet]
         public async Task<List<WorkTimeInSheduleDto>> GetAlls()
         {
             return await _workTimeInSheduleService.GetAll();
