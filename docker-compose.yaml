@@ -7,3 +7,14 @@ services:
             - ${HTTPS_PORT}:443
         environment: 
             - ConnectionStrings:DefaultConnection= ${CONNECTION_STRING}
+    proxy:
+        build:
+            context:  ./nginx
+            dockerfile: Dockerfile
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+             - /etc/letsencrypt/:/etc/letsencrypt/
+        links:
+            - web
