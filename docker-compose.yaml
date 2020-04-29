@@ -17,4 +17,4 @@ services:
         volumes:
              - /etc/letsencrypt/:/etc/letsencrypt/
         links:
-            - web
+            - app
