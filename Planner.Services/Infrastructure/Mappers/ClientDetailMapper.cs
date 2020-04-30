@@ -22,8 +22,10 @@ namespace Planner.Services.Infrastructure.Mappers
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<ClientDetailDto, Client>();
+       
 
-                cfg.CreateMap<Client, ClientDetailDto>();
+                cfg.CreateMap<Client, ClientDetailDto>()
+                .ForMember(x=>x.Fullname, s => s.MapFrom(x => x.FirstName + " " +x.SecondName));
             });
 
             return config.CreateMapper();

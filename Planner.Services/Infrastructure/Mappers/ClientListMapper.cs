@@ -24,7 +24,8 @@ namespace Planner.Services.Infrastructure.Mappers
                 cfg.CreateMap <ClientListDto, Client>();
 
                 cfg.CreateMap<Client, ClientListDto>()
-                .ForMember(x => x.BirthDay, s => s.MapFrom(x => x.BirthDay.ToString("d")))
+                //.ForMember(x => x.BirthDay, s => s.MapFrom(x => x.BirthDay.ToString("d")))
+                .ForMember(x => x.Fullname, s => s.MapFrom(x => x.FirstName + " " + x.SecondName))
                 .ForMember(x => x.Created, s => s.MapFrom(x => x.CreatedDate.ToString("d")));
             });
 
