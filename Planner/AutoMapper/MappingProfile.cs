@@ -24,7 +24,7 @@ namespace Planner.AutoMapper
             CreateMap<SkillModel, Skill>();
 
             CreateMap<EmployeeSkillModel, EmployeeSkill>();
-
+            CreateMap<ClientModel, Client>();
             CreateMap<GroupSkillModel, GroupSkill>();
 
             CreateMap<EmployeeModel, Employee>();

@@ -29,13 +29,12 @@ namespace Planner.Data.Repositories
         public void PutClient(Client employee)
         {
             _context.Entry(employee)
-             .Property(i => i.FirstName).IsModified = true;
+             .Property(i => i.FullName).IsModified = true;
             _context.Entry(employee)
-                .Property(i => i.SecondName).IsModified = true;
+                .Property(i => i.Email).IsModified = true;
             _context.Entry(employee)
-                .Property(i => i.MiddleName).IsModified = true;
-            _context.Entry(employee)
-                .Property(i => i.BirthDay).IsModified = true;
+                .Property(i => i.PhoneNumber).IsModified = true;
+            _context.Entry(employee);
         }
         public void PutClientPhoto(Client Client)
         {

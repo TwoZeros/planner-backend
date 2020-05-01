@@ -11,6 +11,7 @@ using Planner.Dto.Models;
 using Planner.Services.Contract;
 using Planner.Services.Contract.Dto;
 using Microsoft.AspNetCore.Authorization;
+using AutoMapper;
 
 namespace Planner.Controllers
 {
@@ -20,9 +21,11 @@ namespace Planner.Controllers
     {
         private readonly PlannerDbContext _context;
         private readonly IClientService _clientService;
-        public ClientController(PlannerDbContext context, IClientService clientService)
+        private readonly IMapper _mapper;
+        public ClientController(PlannerDbContext context, IMapper mapper, IClientService clientService)
         {
             _context = context;
+            _mapper = mapper;
             _clientService = clientService;
         }
 
@@ -50,11 +53,11 @@ namespace Planner.Controllers
 
         // PUT: api/Client/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutClient(int id, Client client)
+        public async Task<IActionResult> PutClient(int id, ClientModel model)
         {
-            if (id != client.Id)
+            if (id != model.Id)
                 return BadRequest();
-
+            Client client = _mapper.Map<ClientModel, Client>(model);
             _clientService.PutClient(id, client);
 
             try
@@ -106,9 +109,10 @@ namespace Planner.Controllers
         // POST: api/Client
 
         [HttpPost]
-        public async Task<ActionResult<Client>> PostClient(Client client)
+        public async Task<ActionResult<Client>> PostClient(ClientModel model)
         {
-           await _clientService.AddClient(client);
+            Client client = _mapper.Map<ClientModel, Client>(model);
+            await _clientService.AddClient(client);
 
             return CreatedAtAction("GetClient", new { id = client.Id }, client);
         }

@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Planner.Services.Contract.Dto
+namespace Planner.Dto.Models
 {
-    public class ClientListDto
+    public class ClientModel
     {
         public int Id { get; set; }
         public string FullName { get; set; }
+
+        public string Photo { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
-        public string Created { get; set; }
     }
-
-   
 }
