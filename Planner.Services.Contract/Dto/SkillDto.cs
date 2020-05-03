@@ -8,7 +8,7 @@ namespace Planner.Services.Contract.Dto
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
+        public int GroupSkillId { get; set; }
         public string GroupName { get; set; }
     }
 }
