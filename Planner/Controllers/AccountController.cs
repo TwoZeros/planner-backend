@@ -11,14 +11,15 @@ using Planner.Services;
 using Planner.Common;
 using Planner.Services.Contract;
 using Planner.Services.Contract.Dto;
+using Microsoft.AspNetCore.Authorization;
 
 namespace todo.Controllers
 {
     public class AccountController : Controller
     {
         
-        private readonly IAuthorizationService _authorization;
-        public AccountController( IAuthorizationService auth)
+        private readonly Planner.Services.Contract.IAuthorizationService _authorization;
+        public AccountController(Planner.Services.Contract.IAuthorizationService auth)
         {
             _authorization = auth;
         }
@@ -36,6 +37,13 @@ namespace todo.Controllers
                  
         }
 
-       
+        [Authorize]
+        [HttpGet("/getLogin")]
+        public IActionResult GetLogin()
+        {
+            return Ok($"Ваш логин: {User.Identity.Name}");
+        }
+
+
     }
 }
