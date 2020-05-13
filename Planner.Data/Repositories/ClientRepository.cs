@@ -26,15 +26,15 @@ namespace Planner.Data.Repositories
                 .FirstOrDefaultAsync(f => f.Id == id);
         }
 
-        public void PutClient(Client employee)
+        public void PutClient(Client client)
         {
-            _context.Entry(employee)
+            _context.Entry(client)
              .Property(i => i.FullName).IsModified = true;
-            _context.Entry(employee)
+            _context.Entry(client)
                 .Property(i => i.Email).IsModified = true;
-            _context.Entry(employee)
+            _context.Entry(client)
                 .Property(i => i.PhoneNumber).IsModified = true;
-            _context.Entry(employee);
+            _context.Entry(client);
         }
         public void PutClientPhoto(Client Client)
         {
