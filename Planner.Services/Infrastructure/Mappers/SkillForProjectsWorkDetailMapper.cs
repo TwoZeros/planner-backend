@@ -21,9 +21,9 @@ namespace Planner.Services.Infrastructure.Mappers
                 cfg.CreateMap<SkillForProjectWorkDto, SkillForProjectWork>();
 
                 cfg.CreateMap<SkillForProjectWork, SkillForProjectWorkDto>()
-                .ForMember(x => x.ProjectName, s => s.MapFrom(x => x.ProjectWork.Project.Name));
-                cfg.CreateMap<SkillForProjectWork, SkillForProjectWorkDto>()
+                .ForMember(x => x.ProjectName, s => s.MapFrom(x => x.ProjectWork.Project.Name))
                 .ForMember(x => x.SkillName, s => s.MapFrom(x => x.Skill.Name));
+
             });
 
             return config.CreateMapper();

@@ -20,12 +20,13 @@ namespace Planner.Data.Repositories
 
         public async Task<List<SkillForProjectWork>> GetAllSkillForProjectsWork()
         {
-            return await _context.SkillForProjectWorks.Include(p => p.SkillId).ToListAsync();
+            return await _context.SkillForProjectWorks.Include(p => p.Skill).ToListAsync();
         }
 
         public async Task<SkillForProjectWork> GetSkillForProjectsWorkInfo(int id)
         {
-            return await _context.SkillForProjectWorks.Include(p => p.SkillId)
+            return await _context.SkillForProjectWorks
+                .Include(p => p.Skill)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(f => f.Id == id);
         }

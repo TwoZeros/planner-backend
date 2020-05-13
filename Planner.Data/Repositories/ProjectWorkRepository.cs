@@ -20,12 +20,12 @@ namespace Planner.Data.Repositories
 
         public async Task<List<ProjectWork>> GetAllProjectWork()
         {
-            return await _context.ProjectWorks.Include(p => p.StartTime).ToListAsync();
+            return await _context.ProjectWorks.Include(p => p.Project).ToListAsync();
         }
 
         public async Task<ProjectWork> GetProjectWorkInfo(int id)
         {
-            return await _context.ProjectWorks.Include(p => p.DeadlineTime)
+            return await _context.ProjectWorks.Include(p => p.Project)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(f => f.Id == id);
         }

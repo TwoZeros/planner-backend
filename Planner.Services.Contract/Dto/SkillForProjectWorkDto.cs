@@ -7,7 +7,7 @@ namespace Planner.Services.Contract.Dto
     public class SkillForProjectWorkDto
     {
         public int Id { get; set; }
-        public int SkillName { get; set; }
-        public int ProjectName { get; set; }
+        public string SkillName { get; set; }
+        public string ProjectName { get; set; }
     }
 }

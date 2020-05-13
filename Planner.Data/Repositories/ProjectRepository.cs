@@ -18,12 +18,13 @@ namespace Planner.Data.Repositories
 
         public async Task<List<Project>> GetAllProject()
         {
-            return await _context.Projects.Include(p => p.Name).ToListAsync();
+            return await _context.Projects.Include(p => p.ProjectManager).ToListAsync();
         }
 
         public async Task<Project> GetProjectInfo(int id)
         {
-            return await _context.Projects.Include(p => p.Name)
+            return await _context.Projects
+                .Include(p => p.ProjectManager)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(f => f.Id == id);
         }
