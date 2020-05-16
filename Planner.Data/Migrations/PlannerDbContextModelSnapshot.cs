@@ -26,21 +26,10 @@ namespace Planner.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsLocalBranch")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TimeZoneId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("CompanyId");
 
                     b.ToTable("BranchCompanys");
                 });
@@ -153,11 +142,11 @@ namespace Planner.Data.Migrations
                     b.Property<DateTime>("BirthDay")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("BranchCompanyId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("DepartamentId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(60)")
@@ -192,7 +181,7 @@ namespace Planner.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchCompanyId");
+                    b.HasIndex("DepartamentId");
 
                     b.HasIndex("PositionId");
 
@@ -384,19 +373,10 @@ namespace Planner.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Day")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Hour")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("Day")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("LackOfEmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Mounth")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -626,8 +606,8 @@ namespace Planner.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("int");
+                    b.Property<string>("ContryCode")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -745,35 +725,26 @@ namespace Planner.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Day")
+                    b.Property<int>("CountHours")
                         .HasColumnType("int");
 
-                    b.Property<int>("Hour")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int>("Mounth")
-                        .HasColumnType("int");
+                    b.Property<string>("HolidayName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SheduleId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
+                    b.Property<bool>("isHoliday")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
                     b.HasIndex("SheduleId");
 
                     b.ToTable("WorkTimeInChedules");
-                });
-
-            modelBuilder.Entity("Planner.Models.BranchCompany", b =>
-                {
-                    b.HasOne("Planner.Models.Company", "Company")
-                        .WithMany("BranchCompany")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Planner.Models.Comment", b =>
@@ -793,9 +764,9 @@ namespace Planner.Data.Migrations
 
             modelBuilder.Entity("Planner.Models.Employee", b =>
                 {
-                    b.HasOne("Planner.Models.BranchCompany", "BranchCompany")
+                    b.HasOne("Planner.Models.BranchCompany", "Depatamnet")
                         .WithMany("Employees")
-                        .HasForeignKey("BranchCompanyId");
+                        .HasForeignKey("DepartamentId");
 
                     b.HasOne("Planner.Models.Position", "Position")
                         .WithMany()
@@ -860,7 +831,7 @@ namespace Planner.Data.Migrations
             modelBuilder.Entity("Planner.Models.Holidays", b =>
                 {
                     b.HasOne("Planner.Models.BranchCompany", "BranchCompany")
-                        .WithMany("Holidays")
+                        .WithMany()
                         .HasForeignKey("BranchCompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

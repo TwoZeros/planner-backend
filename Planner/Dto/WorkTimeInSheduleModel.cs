@@ -8,10 +8,10 @@ namespace Planner.Dto.Models
     public class WorkTimeInSheduleModel
     {
         public int Id { get; set; }
-        public int Year { get; set; }
-        public int Mounth { get; set; }
-        public int Day { get; set; }
-        public int Hour { get; set; }
+        public DateTime Date { get; set; }
+        public bool isHoliday { get; set; }
+        public string HolidayName { get; set; }
+        public int CountHours { get; set; }
         public int SheduleId { get; set; }
     }
 }

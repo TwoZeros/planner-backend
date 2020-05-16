@@ -10,8 +10,8 @@ using Planner.Data;
 namespace Planner.Data.Migrations
 {
     [DbContext(typeof(PlannerDbContext))]
-    [Migration("20200501183317_fix-kate-model")]
-    partial class fixkatemodel
+    [Migration("20200516171846_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,21 +28,10 @@ namespace Planner.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsLocalBranch")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TimeZoneId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("CompanyId");
 
                     b.ToTable("BranchCompanys");
                 });
@@ -75,9 +64,6 @@ namespace Planner.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("BirthDay")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -85,12 +71,8 @@ namespace Planner.Data.Migrations
                         .HasColumnType("nvarchar(60)")
                         .HasMaxLength(60);
 
-                    b.Property<string>("FirstName")
+                    b.Property<string>("FullName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("MiddleName")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
@@ -100,11 +82,6 @@ namespace Planner.Data.Migrations
 
                     b.Property<string>("Photo")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SecondName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
 
                     b.HasKey("Id");
 
@@ -398,19 +375,10 @@ namespace Planner.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Day")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Hour")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("Day")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("LackOfEmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Mounth")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -611,6 +579,9 @@ namespace Planner.Data.Migrations
                     b.Property<int>("Hours")
                         .HasColumnType("int");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("NextWorkId")
                         .HasColumnType("int");
 
@@ -637,8 +608,8 @@ namespace Planner.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("int");
+                    b.Property<string>("ContryCode")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -756,35 +727,26 @@ namespace Planner.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Day")
+                    b.Property<int>("CountHours")
                         .HasColumnType("int");
 
-                    b.Property<int>("Hour")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int>("Mounth")
-                        .HasColumnType("int");
+                    b.Property<string>("HolidayName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SheduleId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
+                    b.Property<bool>("isHoliday")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
                     b.HasIndex("SheduleId");
 
                     b.ToTable("WorkTimeInChedules");
-                });
-
-            modelBuilder.Entity("Planner.Models.BranchCompany", b =>
-                {
-                    b.HasOne("Planner.Models.Company", "Company")
-                        .WithMany("BranchCompany")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Planner.Models.Comment", b =>
@@ -871,7 +833,7 @@ namespace Planner.Data.Migrations
             modelBuilder.Entity("Planner.Models.Holidays", b =>
                 {
                     b.HasOne("Planner.Models.BranchCompany", "BranchCompany")
-                        .WithMany("Holidays")
+                        .WithMany()
                         .HasForeignKey("BranchCompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

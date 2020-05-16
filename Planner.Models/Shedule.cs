@@ -9,7 +9,7 @@ namespace Planner.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int CompanyId { get; set; }
+        public string ContryCode { get; set; }
         public List<WorkTimeInShedule> WorkTimeInShedules{ get; set; }
         public List<EmployeeShedule> EmployeeShedules { get; set; }
     }

@@ -14,13 +14,6 @@ namespace Planner.Data.Configurations
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Name).HasMaxLength(256);
 
-
-            builder
-                   .HasOne(p => p.BranchCompany)
-                   .WithMany(t => t.Holidays)
-                   .HasForeignKey(p => p.BranchCompanyId);
-
-
         }
     }
 }

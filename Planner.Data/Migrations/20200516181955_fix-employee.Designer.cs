@@ -10,8 +10,8 @@ using Planner.Data;
 namespace Planner.Data.Migrations
 {
     [DbContext(typeof(PlannerDbContext))]
-    [Migration("20200422141951_fix-skill2")]
-    partial class fixskill2
+    [Migration("20200516181955_fix-employee")]
+    partial class fixemployee
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,21 @@ namespace Planner.Data.Migrations
                 .HasAnnotation("ProductVersion", "3.1.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Planner.Models.BranchCompany", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BranchCompanys");
+                });
 
             modelBuilder.Entity("Planner.Models.CarmaUser", b =>
                 {
@@ -49,9 +64,6 @@ namespace Planner.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("BirthDay")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -59,12 +71,8 @@ namespace Planner.Data.Migrations
                         .HasColumnType("nvarchar(60)")
                         .HasMaxLength(60);
 
-                    b.Property<string>("FirstName")
+                    b.Property<string>("FullName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("MiddleName")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
@@ -74,11 +82,6 @@ namespace Planner.Data.Migrations
 
                     b.Property<string>("Photo")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SecondName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
 
                     b.HasKey("Id");
 
@@ -116,6 +119,21 @@ namespace Planner.Data.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("Planner.Models.Company", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Companys");
+                });
+
             modelBuilder.Entity("Planner.Models.Employee", b =>
                 {
                     b.Property<int>("Id")
@@ -128,6 +146,9 @@ namespace Planner.Data.Migrations
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("DepartamentId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(60)")
@@ -162,11 +183,66 @@ namespace Planner.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DepartamentId");
+
                     b.HasIndex("PositionId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("Planner.Models.EmployeeOnWork", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("FactEnd")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FactStart")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("EmployeeOnWorks");
+                });
+
+            modelBuilder.Entity("Planner.Models.EmployeeShedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SheduleId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartWith")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("SheduleId");
+
+                    b.ToTable("EmployeeShedules");
                 });
 
             modelBuilder.Entity("Planner.Models.EmployeeSkill", b =>
@@ -214,6 +290,29 @@ namespace Planner.Data.Migrations
                     b.ToTable("GroupSkills");
                 });
 
+            modelBuilder.Entity("Planner.Models.Holidays", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BranchCompanyId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BranchCompanyId");
+
+                    b.ToTable("Holidays");
+                });
+
             modelBuilder.Entity("Planner.Models.KnowledgeLevel", b =>
                 {
                     b.Property<int>("Id")
@@ -244,6 +343,49 @@ namespace Planner.Data.Migrations
                             Id = 3,
                             Name = "Senior"
                         });
+                });
+
+            modelBuilder.Entity("Planner.Models.LackOfEmployee", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("LackOfEmployees");
+                });
+
+            modelBuilder.Entity("Planner.Models.LackTime", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Day")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LackOfEmployeeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LackOfEmployeeId");
+
+                    b.ToTable("LackTimes");
                 });
 
             modelBuilder.Entity("Planner.Models.LogEntry", b =>
@@ -398,6 +540,85 @@ namespace Planner.Data.Migrations
                     b.ToTable("ProductInOrders");
                 });
 
+            modelBuilder.Entity("Planner.Models.Project", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProjectManagerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalHour")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectManagerId");
+
+                    b.ToTable("Projects");
+                });
+
+            modelBuilder.Entity("Planner.Models.ProjectWork", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DeadlineTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Hours")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NextWorkId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PreviosWorkId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("ProjectWorks");
+                });
+
+            modelBuilder.Entity("Planner.Models.Shedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ContryCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Shedules");
+                });
+
             modelBuilder.Entity("Planner.Models.Skill", b =>
                 {
                     b.Property<int>("Id")
@@ -424,6 +645,28 @@ namespace Planner.Data.Migrations
                     b.HasIndex("KnowledgeLevelId");
 
                     b.ToTable("Skills");
+                });
+
+            modelBuilder.Entity("Planner.Models.SkillForProjectWork", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ProjectWorkId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SkillId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectWorkId");
+
+                    b.HasIndex("SkillId");
+
+                    b.ToTable("SkillForProjectWorks");
                 });
 
             modelBuilder.Entity("Planner.Models.StatusOrder", b =>
@@ -477,6 +720,35 @@ namespace Planner.Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Planner.Models.WorkTimeInShedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CountHours")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("HolidayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SheduleId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isHoliday")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SheduleId");
+
+                    b.ToTable("WorkTimeInChedules");
+                });
+
             modelBuilder.Entity("Planner.Models.Comment", b =>
                 {
                     b.HasOne("Planner.Models.Client", "Client")
@@ -494,6 +766,10 @@ namespace Planner.Data.Migrations
 
             modelBuilder.Entity("Planner.Models.Employee", b =>
                 {
+                    b.HasOne("Planner.Models.BranchCompany", "Depatamnet")
+                        .WithMany("Employees")
+                        .HasForeignKey("DepartamentId");
+
                     b.HasOne("Planner.Models.Position", "Position")
                         .WithMany()
                         .HasForeignKey("PositionId");
@@ -501,6 +777,36 @@ namespace Planner.Data.Migrations
                     b.HasOne("Planner.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Planner.Models.EmployeeOnWork", b =>
+                {
+                    b.HasOne("Planner.Models.Employee", "Employee")
+                        .WithMany("EmployeeOnWorks")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Planner.Models.Project", "Project")
+                        .WithMany("EmployeeOnWorks")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Planner.Models.EmployeeShedule", b =>
+                {
+                    b.HasOne("Planner.Models.Employee", "Employee")
+                        .WithMany("EmployeeShedules")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Planner.Models.Shedule", "Shedule")
+                        .WithMany("EmployeeShedules")
+                        .HasForeignKey("SheduleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Planner.Models.EmployeeSkill", b =>
@@ -520,6 +826,33 @@ namespace Planner.Data.Migrations
                     b.HasOne("Planner.Models.Skill", "Skill")
                         .WithMany("EmployeeSkill")
                         .HasForeignKey("SkillId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Planner.Models.Holidays", b =>
+                {
+                    b.HasOne("Planner.Models.BranchCompany", "BranchCompany")
+                        .WithMany()
+                        .HasForeignKey("BranchCompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Planner.Models.LackOfEmployee", b =>
+                {
+                    b.HasOne("Planner.Models.Employee", "Employee")
+                        .WithMany("LackOfEmployees")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Planner.Models.LackTime", b =>
+                {
+                    b.HasOne("Planner.Models.LackOfEmployee", "LackOfEmployee")
+                        .WithMany("LackTimes")
+                        .HasForeignKey("LackOfEmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -558,6 +891,24 @@ namespace Planner.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Planner.Models.Project", b =>
+                {
+                    b.HasOne("Planner.Models.Employee", "ProjectManager")
+                        .WithMany("Projects")
+                        .HasForeignKey("ProjectManagerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Planner.Models.ProjectWork", b =>
+                {
+                    b.HasOne("Planner.Models.Project", "Project")
+                        .WithMany("ProjectWorks")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Planner.Models.Skill", b =>
                 {
                     b.HasOne("Planner.Models.GroupSkill", "GroupSkill")
@@ -569,6 +920,30 @@ namespace Planner.Data.Migrations
                     b.HasOne("Planner.Models.KnowledgeLevel", null)
                         .WithMany("Skills")
                         .HasForeignKey("KnowledgeLevelId");
+                });
+
+            modelBuilder.Entity("Planner.Models.SkillForProjectWork", b =>
+                {
+                    b.HasOne("Planner.Models.ProjectWork", "ProjectWork")
+                        .WithMany("SkillForProjectWork")
+                        .HasForeignKey("ProjectWorkId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Planner.Models.Skill", "Skill")
+                        .WithMany("SkillForProjectWork")
+                        .HasForeignKey("SkillId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Planner.Models.WorkTimeInShedule", b =>
+                {
+                    b.HasOne("Planner.Models.Shedule", "Shedule")
+                        .WithMany("WorkTimeInShedules")
+                        .HasForeignKey("SheduleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

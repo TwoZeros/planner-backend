@@ -25,9 +25,9 @@ namespace Planner.Data.Configurations
             builder.Property(x => x.Email).HasMaxLength(60);
 
             builder
-                   .HasOne(p => p.BranchCompany)
+                   .HasOne(p => p.Depatamnet)
                    .WithMany(t => t.Employees)
-                   .HasForeignKey(p => p.BranchCompanyId);
+                   .HasForeignKey(p => p.DepartamentId);
 
         }
     }

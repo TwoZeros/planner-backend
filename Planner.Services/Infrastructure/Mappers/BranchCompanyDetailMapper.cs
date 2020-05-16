@@ -19,8 +19,7 @@ namespace Planner.Services.Infrastructure.Mappers
             {
                 cfg.CreateMap<BranchCompanyDto, BranchCompany>();
 
-                cfg.CreateMap<BranchCompany, BranchCompanyDto>()
-                .ForMember(x => x.CompanyName, s => s.MapFrom(x => x.Company.Name));
+                cfg.CreateMap<BranchCompany, BranchCompanyDto>();
             });
 
             return config.CreateMapper();

@@ -20,12 +20,12 @@ namespace Planner.Data.Repositories
 
         public async Task<List<BranchCompany>> GetAllBranchCompany()
         {
-            return await _context.BranchCompanys.Include(p => p.Name).ToListAsync();
+            return await _context.BranchCompanys.ToListAsync();
         }
 
         public async Task<BranchCompany> GetBranchCompanyInfo(int id)
         {
-            return await _context.BranchCompanys.Include(p => p.Name)
+            return await _context.BranchCompanys
                 .AsNoTracking()
                 .FirstOrDefaultAsync(f => f.Id == id);
         }

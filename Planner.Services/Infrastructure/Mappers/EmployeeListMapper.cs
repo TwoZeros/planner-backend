@@ -26,6 +26,7 @@ namespace Planner.Services.Infrastructure.Mappers
                 cfg.CreateMap<Employee, EmployeeListDto>()
                 .ForMember(x => x.Login, s => s.MapFrom(x => x.User.Login))
                 .ForMember(x => x.BirthDay, s => s.MapFrom(x => x.BirthDay.ToString("d")))
+                .ForMember(x => x.DepartamentName, s => s.MapFrom(x => x.Depatamnet.Name))
                 .ForMember(x => x.Created, s => s.MapFrom(x => x.CreatedDate.ToString("d")));
             });
 

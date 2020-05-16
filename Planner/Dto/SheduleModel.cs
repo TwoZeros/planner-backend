@@ -10,6 +10,6 @@ namespace Planner.Dto.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int CompanyId { get; set; }
+        public string ContryCode { get; set; }
     }
 }

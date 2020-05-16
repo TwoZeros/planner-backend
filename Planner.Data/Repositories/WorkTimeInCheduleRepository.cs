@@ -18,12 +18,12 @@ namespace Planner.Data.Repositories
 
         public async Task<List<WorkTimeInShedule>> GetAllWorkTimeInChedule()
         {
-            return await _context.WorkTimeInChedules.Include(p => p.Hour).ToListAsync();
+            return await _context.WorkTimeInChedules.ToListAsync();
         }
 
         public async Task<WorkTimeInShedule> GetWorkTimeInCheduleInfo(int id)
         {
-            return await _context.WorkTimeInChedules.Include(p => p.Hour)
+            return await _context.WorkTimeInChedules
                 .AsNoTracking()
                 .FirstOrDefaultAsync(f => f.Id == id);
         }

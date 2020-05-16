@@ -23,7 +23,8 @@ namespace Planner.Services.Infrastructure.Mappers
             {
                 cfg.CreateMap<EmployeeDetailDto, Employee>();
 
-                cfg.CreateMap<Employee, EmployeeDetailDto>();
+                cfg.CreateMap<Employee, EmployeeDetailDto>()
+                .ForMember(x => x.DepartamentName, s => s.MapFrom(x => x.Depatamnet.Name));
             });
 
             return config.CreateMapper();

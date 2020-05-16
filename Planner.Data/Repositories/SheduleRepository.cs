@@ -20,12 +20,12 @@ namespace Planner.Data.Repositories
 
         public async Task<List<Shedule>> GetAllShedule()
         {
-            return await _context.Shedules.Include(p => p.Name).ToListAsync();
+            return await _context.Shedules.ToListAsync();
         }
 
         public async Task<Shedule> GetSheduleInfo(int id)
         {
-            return await _context.Shedules.Include(p => p.Name)
+            return await _context.Shedules
                 .AsNoTracking()
                 .FirstOrDefaultAsync(f => f.Id == id);
         }

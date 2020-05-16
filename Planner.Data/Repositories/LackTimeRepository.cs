@@ -18,12 +18,12 @@ namespace Planner.Data.Repositories
 
         public async Task<List<LackTime>> GetAllLackTime()
         {
-            return await _context.LackTimes.Include(p => p.Hour).ToListAsync();
+            return await _context.LackTimes.ToListAsync();
         }
 
         public async Task<LackTime> GetLackTimeInfo(int id)
         {
-            return await _context.LackTimes.Include(p => p.Hour)
+            return await _context.LackTimes
                 .AsNoTracking()
                 .FirstOrDefaultAsync(f => f.Id == id);
         }

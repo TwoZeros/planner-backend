@@ -12,6 +12,8 @@ namespace Planner.Services.Contract.Dto
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string MiddleName { get; set; }
+
+        public string DepartamentName { get; set; }
         public string Login { get; set; }
         public string BirthDay { get; set; }
         public string Created { get; set; }

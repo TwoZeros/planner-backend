@@ -21,7 +21,7 @@ namespace Planner.Data.Repositories
         }
         public async Task<Employee> GetEmployeeInfo(int id)
         {
-            return await _context.Employees.Include(p => p.User)
+            return await _context.Employees.Include(p => p.User).Include(p=>p.Depatamnet)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(f => f.Id == id);
         }
@@ -51,7 +51,7 @@ namespace Planner.Data.Repositories
 
         public List<Employee> GetListEmployee()
         {
-            return  _context.Employees.Include(p => p.User).ToList();
+            return  _context.Employees.Include(p => p.User).Include(p => p.Depatamnet).ToList();
         }
 
     }

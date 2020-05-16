@@ -20,7 +20,8 @@ namespace Planner.Services.Infrastructure.Mappers
                 cfg.CreateMap<LackTimeDto, LackTime>();
 
                 cfg.CreateMap<LackTime, LackTimeDto>()
-                .ForMember(x => x.LackOfEmployeeName, s => s.MapFrom(x => x.LackOfEmployee.Name));
+                .ForMember(x => x.LackOfEmployeeName, s => s.MapFrom(x => x.LackOfEmployee.Name))
+                .ForMember(x => x.Day, s => s.MapFrom(x => x.Day.ToString()));
             });
 
             return config.CreateMapper();

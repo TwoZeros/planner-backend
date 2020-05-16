@@ -11,6 +11,8 @@ namespace Planner.Dto.Models
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string MiddleName { get; set; }
+        public int? DepartamentId { get; set; }
+
         public string Photo { get; set; }
         public DateTime BirthDay { get; set; }
         public int? UserId { get; set; }
