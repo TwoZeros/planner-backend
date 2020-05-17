@@ -83,5 +83,6 @@ namespace Planner.Data
         public DbSet<LackOfEmployee> LackOfEmployees { get; set; }
         public DbSet<EmployeeShedule> EmployeeShedules { get; set; }
         public DbSet<EmployeeOnWork> EmployeeOnWorks { get; set; }
+        public DbSet<ProjectWorkShedule> ProjectWorkShedules { get; set; }
     }
 }

@@ -78,6 +78,7 @@ namespace Planner
             services.AddTransient<ILackTimeDetailMapper, LackTimeDetailMapper>(); 
             services.AddTransient<IEmployeeSheduleDetailMapper, EmployeeSheduleDetailMapper>();
             services.AddTransient<IEmployeeOnWorkDetailMapper, EmployeeOnWorkDetailMapper>();
+            services.AddTransient<IProjectWorkSheduleDetailMapper, ProjectWorkSheduleDetailMapper>();
 
             // Services
             Services.Infrastructure.ContainerConfiguration.Configure(services);

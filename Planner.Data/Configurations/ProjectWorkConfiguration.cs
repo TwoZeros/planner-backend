@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Planner.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+
 
 namespace Planner.Data.Configurations
 {
@@ -16,7 +14,18 @@ namespace Planner.Data.Configurations
             builder
                    .HasOne(p => p.Project)
                    .WithMany(t => t.ProjectWorks)
-                   .HasForeignKey(p => p.ProjectId);
+                   .HasForeignKey(p => p.ProjectId)
+                   .OnDelete(DeleteBehavior.SetNull);
+            builder
+                   .HasOne(p => p.Employee)
+                   .WithMany(t => t.ProjectWorks)
+                   .HasForeignKey(p => p.EmployeeId)
+                   .OnDelete(DeleteBehavior.SetNull);
+            builder
+                   .HasOne(p => p.ProjectWorkShedule)
+                   .WithMany(t => t.ProjectWorks)
+                   .HasForeignKey(p => p.ProjectWorkSheduleId)
+                   .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

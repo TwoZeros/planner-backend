@@ -19,7 +19,9 @@ namespace Planner.Services.Infrastructure.Mappers
             {
                 cfg.CreateMap<ProjectWorkDto, ProjectWork>();
 
-                cfg.CreateMap<ProjectWork, ProjectWorkDto>();
+                cfg.CreateMap<ProjectWork, ProjectWorkDto>()
+                .ForMember(x => x.DeadlineTime, s => s.MapFrom(x => x.DeadlineTime.ToString("d")))
+                .ForMember(x => x.ProjectName, s => s.MapFrom(x => x.Project.Name));
             });
 
             return config.CreateMapper();

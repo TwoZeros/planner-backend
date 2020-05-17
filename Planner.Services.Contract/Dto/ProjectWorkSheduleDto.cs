@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Planner.Services.Contract.Dto
 {
-    public class EmployeeSheduleDto
+    public class ProjectWorkSheduleDto
     {
         public int Id { get; set; }
-        public string SheduleName { get; set; }
-        public string EmployeeName { get; set; }
+        public string Day { get; set; }
+        public int CountHours { get; set; }
     }
 }

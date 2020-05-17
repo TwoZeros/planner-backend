@@ -20,7 +20,6 @@ namespace Planner.Services.Infrastructure.Mappers
                 cfg.CreateMap<EmployeeSheduleDto, EmployeeShedule>();
 
                 cfg.CreateMap<EmployeeShedule, EmployeeSheduleDto>()
-                .ForMember(x => x.StartWith, s => s.MapFrom(x => x.StartWith.ToShortDateString()))
                 .ForMember(x => x.SheduleName, s => s.MapFrom(x => x.Shedule.Name))
                 .ForMember(x => x.EmployeeName, s => s.MapFrom(x => x.Employee.FirstName));
             });

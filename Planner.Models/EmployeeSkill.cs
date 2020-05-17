@@ -15,7 +15,5 @@ namespace Planner.Models
         public Employee Employee { get; set; }
         public Skill Skill { get; set; }
         public KnowledgeLevel KnowledgeLevel { get; set; }
-        
-
     }
 }

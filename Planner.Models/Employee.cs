@@ -24,9 +24,9 @@ namespace Planner.Models
         public BranchCompany Depatamnet { get; set; }
         public List<EmployeeSkill> EmployeeSkill { get; set; }
         public List<Project> Projects { get; set; }
-        public List<LackOfEmployee> LackOfEmployees{ get; set; }
+        public List<LackOfEmployee> LackOfEmployees { get; set; }
         public List<EmployeeShedule> EmployeeShedules { get; set; }
         public List<EmployeeOnWork> EmployeeOnWorks { get; set; }
-
+        public List<ProjectWork> ProjectWorks { get; set; }
     }
 }

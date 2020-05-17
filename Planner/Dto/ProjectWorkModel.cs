@@ -13,7 +13,7 @@ namespace Planner.Dto.Models
         public DateTime StartTime { get; set; }
         public DateTime DeadlineTime { get; set; }
         public int ProjectId { get; set; }
-        public int PreviosWorkId { get; set; }
-        public int NextWorkId { get; set; }    
+        public int EmployeeId { get; set; }
+        public int ProjectWorkSheduleId { get; set; }
     }
 }

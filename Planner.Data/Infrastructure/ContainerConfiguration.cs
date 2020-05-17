@@ -33,6 +33,7 @@ namespace Planner.Data.Infrastructure
             services.AddTransient<ILackTimeRepository, LackTimeRepository>();
             services.AddTransient<IEmployeeSheduleRepository, EmployeeSheduleRepository>();
             services.AddTransient<IEmployeeOnWorkRepository, EmployeeOnWorkRepository>();
+            services.AddTransient<IProjectWorkSheduleRepository, ProjectWorkSheduleRepository>();
         }
    }
 }

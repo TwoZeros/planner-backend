@@ -16,7 +16,8 @@ namespace Planner.Data.Configurations
             builder
                    .HasOne(p => p.Project)
                    .WithMany(t => t.EmployeeOnWorks)
-                   .HasForeignKey(p => p.ProjectId);
+                   .HasForeignKey(p => p.ProjectId)
+                   .OnDelete(DeleteBehavior.SetNull);
             builder
                    .HasOne(p => p.Employee)
                    .WithMany(t => t.EmployeeOnWorks)

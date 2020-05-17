@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Planner.Services.Contract
 {
-    public interface IProjectWorkService 
+    public interface IProjectWorkService
     {
         Task<ProjectWorkDto> GetById(int id);
         Task<List<ProjectWorkDto>> GetAll();

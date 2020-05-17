@@ -30,6 +30,7 @@ namespace Planner.Services.Infrastructure
             services.AddTransient<IWorkTimeInCheduleService, WorkTimeInCheduleService>();
             services.AddTransient<ISheduleService, SheduleService>();
             services.AddTransient<IEmployeeOnWorkService, EmployeeOnWorkService>();
+            services.AddTransient<IProjectWorkSheduleService, ProjectWorkSheduleService>();
 
             services.AddTransient<ICarmaUser, CarmaUserService>(); 
 

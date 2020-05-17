@@ -1,7 +1,6 @@
 ﻿using Planner.Models.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Planner.Models
 {
@@ -13,8 +12,10 @@ namespace Planner.Models
         public DateTime StartTime { get; set; }
         public DateTime DeadlineTime { get; set; }
         public int ProjectId { get; set; }
-        public int PreviosWorkId { get; set; }
-        public int NextWorkId { get; set; }
+        public int EmployeeId { get; set; }
+        public int ProjectWorkSheduleId { get; set; }
+        public ProjectWorkShedule ProjectWorkShedule { get; set; }
+        public Employee Employee { get; set; }
         public Project Project { get; set; }
         public List<SkillForProjectWork> SkillForProjectWork { get; set; }
     }

@@ -5,16 +5,11 @@ using System.Text;
 
 namespace Planner.Models
 {
-    public class WorkTimeInShedule : IEntity
+    public class ProjectWorkShedule : IEntity
     {
         public int Id { get; set; }
-
-        public DateTime Date { get; set; }
-        public bool isHoliday { get; set; }
-        public string HolidayName { get; set; }
+        public DateTime Day { get; set; }
         public int CountHours { get; set; }
-        public int SheduleId { get; set; }
-        public Shedule Shedule { get; set; }
         public List<ProjectWork> ProjectWorks { get; set; }
     }
 }

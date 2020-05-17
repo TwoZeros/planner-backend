@@ -10,14 +10,9 @@ namespace Planner.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-      
-
         public int GroupSkillId { get; set; }
         public GroupSkill GroupSkill { get; set; }
-
         public List<EmployeeSkill> EmployeeSkill { get; set; }
         public List<SkillForProjectWork> SkillForProjectWork { get; set; }
-
-
     }
 }

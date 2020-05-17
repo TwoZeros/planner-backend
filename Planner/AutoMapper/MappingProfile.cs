@@ -4,6 +4,7 @@ using Planner.Dto.Models;
 using Planner.Models;
 using Planner.Services.Contract.Dto;
 using Planner.Services.Dto;
+using Planner.Dto;
 
 namespace Planner.AutoMapper
 {
@@ -52,6 +53,8 @@ namespace Planner.AutoMapper
             CreateMap<EmployeeSheduleModel, EmployeeShedule>();
 
             CreateMap<EmployeeOnWorkModel, EmployeeOnWork>();
+
+            CreateMap<ProjectWorkSheduleModel, ProjectWorkShedule>();
         }
     }
 }
