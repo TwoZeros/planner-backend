@@ -55,6 +55,8 @@ namespace Planner.AutoMapper
             CreateMap<EmployeeOnWorkModel, EmployeeOnWork>();
 
             CreateMap<ProjectWorkSheduleModel, ProjectWorkShedule>();
+
+            CreateMap<User, UserListModel>();
         }
     }
 }
