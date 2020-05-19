@@ -21,7 +21,7 @@ namespace Planner.Services.Infrastructure.Mappers
                 cfg.CreateMap<CommentListDto, Comment>();
 
                 cfg.CreateMap<Comment, CommentListDto>()
-                .ForMember(x => x.CreateDate, s => s.MapFrom(x => x.CreateDate.ToString("d")))
+                .ForMember(x => x.CreateDate, s => s.MapFrom(x => x.CreateDate.ToString("g")))
                 .ForMember(x => x.UserLogin, s => s.MapFrom(x => x.User.Login));
 
             });
