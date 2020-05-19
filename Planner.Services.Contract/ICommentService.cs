@@ -14,7 +14,8 @@ namespace Planner.Services.Contract
         public Task<CommentDetailDto> GetById(int id);
 
         public List<CommentListDto> GetAll();
-
+        
+        public List<CommentListDto> GetAllCommentsClient(int id);
         public Task<string> Delete(int id);
         public Task AddComment(Comment comment);
 

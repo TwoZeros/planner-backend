@@ -14,6 +14,8 @@ namespace Planner.Data.Contract.Repositories
 
         List<Comment> GetListComment();
 
+        List<Comment> GetClientComments(int id);
+
         void PutComment(Comment сomment);
 
         public List<Comment> GetListCommentWitnId(int id);

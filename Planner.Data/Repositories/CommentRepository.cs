@@ -30,7 +30,10 @@ namespace Planner.Data.Repositories
         {
             return _context.Comments.Include(p => p.Client).Include(p => p.User).ToList();
         }
-
+       public List<Comment> GetClientComments(int id)
+        {
+            return _context.Comments.Include(p => p.Client).Where(p=>p.ClientId==id).ToList();
+        }
         public void PutComment(Comment сomment)
         {
             _context.Entry(сomment)

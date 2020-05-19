@@ -36,6 +36,11 @@ namespace Planner.Services
             var comment = _repo.GetListComment();
             return _listMapper.Map<List<Comment>, List<CommentListDto>>(comment);
         }
+        public List<CommentListDto> GetAllCommentsClient(int id)
+        {
+            var comment = _repo.GetClientComments(id);
+            return _listMapper.Map<List<Comment>, List<CommentListDto>>(comment);
+        }
 
         public async Task<string> Delete(int id)
         {

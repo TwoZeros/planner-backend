@@ -31,7 +31,13 @@ namespace Planner.Controllers
         {
             return _commentService.GetAll();
         }
-        
+
+        [HttpGet("client/{id}")]
+        public List<CommentListDto> GetCommentsByClientId(int id)
+        {
+            return _commentService.GetAllCommentsClient(id);
+        }
+
         // GET: api/Comments/5
         [HttpGet("{id}")]
         public async Task<ActionResult> GetComment(int id)
