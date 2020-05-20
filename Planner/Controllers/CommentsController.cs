@@ -104,7 +104,7 @@ namespace Planner.Controllers
         {
             var userId =_userManagerService.GetUserIdByLogin(User.Identity.Name);
             comment.UserId = userId;
-            await _commentService.AddComment(comment);
+             await _commentService.AddComment(comment);
 
             return new JsonResult("Create");
         }
