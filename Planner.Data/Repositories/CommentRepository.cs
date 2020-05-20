@@ -47,9 +47,10 @@ namespace Planner.Data.Repositories
         {
             return _context.Comments.Where(p => p.ClientId == id).ToList();
         }
-        public int GetRatingByDate(DateTime date)
+        public int GetRatingByDate(DateTime date, int clientId)
         {
-            var comments = _context.Comments.Where(p => p.CreateDate.Date == date.Date).ToList();
+            var comments = _context.Comments.Where(p => p.CreateDate.Date.Date == date.Date.Date)
+                .Where(p=> p.ClientId==clientId).ToList();
             if (comments.Count == 0)
             {
                 return 0;
@@ -61,9 +62,11 @@ namespace Planner.Data.Repositories
             }
             return rating;
         }
-        public List<DateTime> GetDates()
+        public List<DateTime> GetDates(int clientId)
         {
-            return _context.Comments.Select(p => p.CreateDate.Date).Distinct().OrderBy(p => p.Date).ToList();
+            var dates= _context.Comments.Where(p=>p.ClientId== clientId).OrderBy(p => p.CreateDate).Select(p=>p.CreateDate.Date).Distinct().ToList();
+           
+            return dates;
         }
     }
 }

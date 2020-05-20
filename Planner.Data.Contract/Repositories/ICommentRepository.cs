@@ -20,8 +20,8 @@ namespace Planner.Data.Contract.Repositories
 
         public List<Comment> GetListCommentWitnId(int id);
 
-        public int GetRatingByDate(DateTime date);
+        public int GetRatingByDate(DateTime date, int clinentId);
 
-        public List<DateTime> GetDates();
+        public List<DateTime> GetDates(int clientId);
     }
 }

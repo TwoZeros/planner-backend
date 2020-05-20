@@ -82,20 +82,24 @@ namespace Planner.Services
             return karma;
             
         }
-        public List<string> getDateAndRating()
+        public RatingClientByDayDto getDateAndRating(int clientId)
         {
-            var dates = _repo.GetDates();
+            var dates = _repo.GetDates(clientId);
             if (dates.Count == 0)
             {
                 return null;
             }
-            var ratings = new List<string>();
-            foreach(var it in dates)
+            var datesString = new List<string>();
+            var ratings = new List<int>();
+            var ratingCount = 0;
+            foreach(var date in dates)
             {
-                ratings.Add(it.ToString());
-                ratings.Add(_repo.GetRatingByDate(it).ToString());
+                datesString.Add(date.ToString("d"));
+                ratingCount +=  _repo.GetRatingByDate(date, clientId);
+                ratings.Add(ratingCount);
             }
-            return ratings;
+            RatingClientByDayDto obj = new RatingClientByDayDto { Date = datesString, Value = ratings };
+            return obj;
         }
     }
 }

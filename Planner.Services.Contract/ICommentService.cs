@@ -23,6 +23,6 @@ namespace Planner.Services.Contract
 
         public int GetRating(int id);
 
-        public List<string> getDateAndRating();
+        public RatingClientByDayDto getDateAndRating(int id);
     }
 }

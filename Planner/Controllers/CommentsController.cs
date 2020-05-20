@@ -98,19 +98,16 @@ namespace Planner.Controllers
         // POST: api/Comments
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Comment>> PostComment(Comment comment)
         {
-            //var userId =_userManagerService.GetUserIdByLogin(User.Identity.Name);
-            //comment.UserId = userId;
-            // await _commentService.AddComment(comment);
-
-            //return new JsonResult("Create");
-            _context.Comments.Add(comment);
+            var userId =_userManagerService.GetUserIdByLogin(User.Identity.Name);
+            comment.UserId = userId;
+             await _commentService.AddComment(comment);
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetComment", new { id = comment.Id }, comment);
+            return new JsonResult("Create");
+           
         }
 
         // DELETE: api/Comments/5
@@ -126,10 +123,10 @@ namespace Planner.Controllers
             return new JsonResult(status);
         }
 
-        [HttpGet("getRatingsByDates")]
-        public List<string> GetRatingsByDates()
+        [HttpGet("getRatingsByDates/client/{id}")]
+        public RatingClientByDayDto GetRatingsByDates(int id)
         {
-            return _commentService.getDateAndRating();
+            return _commentService.getDateAndRating(id);
         }
 
         private bool CommentExists(int id)
