@@ -100,7 +100,7 @@ namespace Planner.Controllers
         // more details see https://aka.ms/RazorPagesCRUD.
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult<Comment>> PostComment(Comment comment)
+        public async Task<ActionResult> PostComment(Comment comment)
         {
             var userId =_userManagerService.GetUserIdByLogin(User.Identity.Name);
             comment.UserId = userId;
