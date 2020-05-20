@@ -49,7 +49,7 @@ namespace Planner.Data.Repositories
         }
         public int GetRatingByDate(DateTime date, int clientId)
         {
-            var comments = _context.Comments.Where(p => p.CreateDate.Date == date.Date.AddHours(-3))
+            var comments = _context.Comments.Where(p => p.CreateDate.Date == date.AddHours(-3).Date)
                 .Where(p=> p.ClientId==clientId).ToList();
             if (comments.Count == 0)
             {
