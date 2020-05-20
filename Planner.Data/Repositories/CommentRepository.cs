@@ -47,5 +47,23 @@ namespace Planner.Data.Repositories
         {
             return _context.Comments.Where(p => p.ClientId == id).ToList();
         }
+        public int GetRatingByDate(DateTime date)
+        {
+            var comments = _context.Comments.Where(p => p.CreateDate.Date == date.Date).ToList();
+            if (comments.Count == 0)
+            {
+                return 0;
+            }
+            int rating = 0;
+            foreach (var it in comments)
+            {
+                rating += it.Karma;
+            }
+            return rating;
+        }
+        public List<DateTime> GetDates()
+        {
+            return _context.Comments.Select(p => p.CreateDate.Date).Distinct().OrderBy(p => p.Date).ToList();
+        }
     }
 }

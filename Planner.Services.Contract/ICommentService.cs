@@ -22,5 +22,7 @@ namespace Planner.Services.Contract
         public void PutComment(int id, Comment comment);
 
         public int GetRating(int id);
+
+        public List<string> getDateAndRating();
     }
 }

@@ -20,5 +20,8 @@ namespace Planner.Data.Contract.Repositories
 
         public List<Comment> GetListCommentWitnId(int id);
 
+        public int GetRatingByDate(DateTime date);
+
+        public List<DateTime> GetDates();
     }
 }

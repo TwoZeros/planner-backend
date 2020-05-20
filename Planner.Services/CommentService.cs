@@ -73,15 +73,29 @@ namespace Planner.Services
             {
                 return 0;
             }
-            else
+            
+            int karma = 0;
+            foreach (var it in comments)
             {
-                int karma = 0;
-                foreach (var it in comments)
-                {
-                    karma += it.Karma;
-                }
-                return karma;
-            } 
+                karma += it.Karma;
+            }
+            return karma;
+            
+        }
+        public List<string> getDateAndRating()
+        {
+            var dates = _repo.GetDates();
+            if (dates.Count == 0)
+            {
+                return null;
+            }
+            var ratings = new List<string>();
+            foreach(var it in dates)
+            {
+                ratings.Add(it.ToString());
+                ratings.Add(_repo.GetRatingByDate(it).ToString());
+            }
+            return ratings;
         }
     }
 }
