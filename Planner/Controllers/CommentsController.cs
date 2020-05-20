@@ -106,7 +106,7 @@ namespace Planner.Controllers
             comment.UserId = userId;
             await _commentService.AddComment(comment);
 
-            return CreatedAtAction("GetComment", new { id = comment.Id }, comment);
+            return Ok("Create");
         }
 
         // DELETE: api/Comments/5

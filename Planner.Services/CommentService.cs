@@ -23,10 +23,10 @@ namespace Planner.Services
             _repo = repo;
         }
 
-        public async Task<CommentDetailDto> GetById(int id)
+        public async Task<CommentListDto> GetById(int id)
         {
             var comment = await _repo.GetCommentInfo(id);
-            var commentDto = _detailMapper.Map<Comment, CommentDetailDto>(comment);
+            var commentDto = _detailMapper.Map<Comment, CommentListDto>(comment);
 
             return commentDto;
         }
