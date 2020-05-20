@@ -16,12 +16,14 @@ namespace Planner.Services.Infrastructure.Mappers
     {
         protected override IMapper Configure()
         {
+            TimeZoneInfo moscowZone = TimeZoneInfo.FindSystemTimeZoneById("Russian Standard Time");
+
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<CommentListDto, Comment>();
 
                 cfg.CreateMap<Comment, CommentListDto>()
-                .ForMember(x => x.CreateDate, s => s.MapFrom(x => x.CreateDate.ToString("g")))
+                .ForMember(x => x.CreateDate, s => s.MapFrom(x => TimeZoneInfo.ConvertTimeFromUtc(x.CreateDate, moscowZone).ToString("g")))
                 .ForMember(x => x.UserLogin, s => s.MapFrom(x => x.User.Login));
 
             });

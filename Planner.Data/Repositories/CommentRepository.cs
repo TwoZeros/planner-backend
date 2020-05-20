@@ -49,7 +49,7 @@ namespace Planner.Data.Repositories
         }
         public int GetRatingByDate(DateTime date, int clientId)
         {
-            var comments = _context.Comments.Where(p => p.CreateDate.Date.Date == date.Date.Date)
+            var comments = _context.Comments.Where(p => p.CreateDate.Date == date.Date.AddHours(-3))
                 .Where(p=> p.ClientId==clientId).ToList();
             if (comments.Count == 0)
             {
@@ -64,7 +64,7 @@ namespace Planner.Data.Repositories
         }
         public List<DateTime> GetDates(int clientId)
         {
-            var dates= _context.Comments.Where(p=>p.ClientId== clientId).OrderBy(p => p.CreateDate).Select(p=>p.CreateDate.Date).Distinct().ToList();
+            var dates= _context.Comments.Where(p=>p.ClientId== clientId).OrderBy(p => p.CreateDate).Select(p=>p.CreateDate.AddHours(3).Date).Distinct().ToList();
            
             return dates;
         }
