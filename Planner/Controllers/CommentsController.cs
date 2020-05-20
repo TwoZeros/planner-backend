@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,11 +19,12 @@ namespace Planner.Controllers
     {
         private readonly PlannerDbContext _context;
         private readonly ICommentService _commentService;
-
-        public CommentsController(PlannerDbContext context, ICommentService commentService)
+        private readonly IUserManagerService _userManagerService;
+        public CommentsController(PlannerDbContext context, ICommentService commentService, IUserManagerService userManagerService)
         {
             _context = context;
             _commentService = commentService;
+            _userManagerService = userManagerService;
         }
 
         // GET: api/Comments
@@ -95,9 +97,12 @@ namespace Planner.Controllers
         // POST: api/Comments
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Comment>> PostComment(Comment comment)
         {
+            var userId =_userManagerService.GetUserIdByLogin(User.Identity.Name);
+            comment.UserId = userId;
             await _commentService.AddComment(comment);
 
             return CreatedAtAction("GetComment", new { id = comment.Id }, comment);

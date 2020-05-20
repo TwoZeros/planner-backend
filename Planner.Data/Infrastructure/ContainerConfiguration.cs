@@ -34,6 +34,7 @@ namespace Planner.Data.Infrastructure
             services.AddTransient<IEmployeeSheduleRepository, EmployeeSheduleRepository>();
             services.AddTransient<IEmployeeOnWorkRepository, EmployeeOnWorkRepository>();
             services.AddTransient<IProjectWorkSheduleRepository, ProjectWorkSheduleRepository>();
+            services.AddTransient<IUserManagerRepository, UserManagerRepository>();
         }
    }
 }

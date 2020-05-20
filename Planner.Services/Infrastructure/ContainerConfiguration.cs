@@ -39,7 +39,7 @@ namespace Planner.Services.Infrastructure
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IProductInOrderService, ProductInOrderService>();
-
+            services.AddTransient<IUserManagerService, UserManagerService>();
         }
     }
 }
