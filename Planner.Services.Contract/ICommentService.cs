@@ -11,7 +11,7 @@ namespace Planner.Services.Contract
 {
     public interface ICommentService
     {
-        public Task<CommentDetailDto> GetById(int id);
+        public Task<CommentListDto> GetById(int id);
 
         public List<CommentListDto> GetAll();
         
