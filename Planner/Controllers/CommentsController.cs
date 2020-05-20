@@ -35,6 +35,7 @@ namespace Planner.Controllers
         }
 
         [HttpGet("client/{id}")]
+        [Authorize]
         public List<CommentListDto> GetCommentsByClientId(int id)
         {
             return _commentService.GetAllCommentsClient(id);
