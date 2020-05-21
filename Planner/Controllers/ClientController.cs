@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Planner.Data;
@@ -10,7 +8,6 @@ using Planner.Models;
 using Planner.Dto.Models;
 using Planner.Services.Contract;
 using Planner.Services.Contract.Dto;
-using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
 
 namespace Planner.Controllers
@@ -126,10 +123,16 @@ namespace Planner.Controllers
             {
                 return NotFound();
             }
-
  
             return new JsonResult(status);
         }
+
+        [HttpGet("getClientCountByDay")]
+        public ClientsByDayDto GetClientCountByDay()
+        {
+            return _clientService.GetClientsAndDay();
+        }
+
         private bool ClientExists(int id)
         {
             return _context.Clients.Any(e => e.Id == id);

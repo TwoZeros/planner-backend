@@ -42,7 +42,15 @@ namespace Planner.Data.Repositories
              .Property(i => i.Photo).IsModified = true;
         }
         
-
+        public List<DateTime> GetDates()
+        {
+            return _context.Clients.OrderBy(p => p.CreatedDate).Select(p => p.CreatedDate.AddHours(3).Date).Distinct().ToList();
+        }
+        
+        public int GetClientCountByDate(DateTime date)
+        {
+            return _context.Clients.Where(p => p.CreatedDate.AddHours(3).Date == date.Date).Count();
+        }
 
         public List<Client> GetListClient()
         {

@@ -21,5 +21,6 @@ namespace Planner.Services.Contract
         public void PutClient(int id, Client client);
 
         public void PutClientPhoto(int id, Client Client);
+        public ClientsByDayDto GetClientsAndDay();
     }
 }

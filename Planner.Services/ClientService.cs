@@ -27,7 +27,6 @@ namespace Planner.Services
             _repo = repo;
 
         }
-
         public async Task<ClientDetailDto> GetById(int id)
         {
             var client = await _repo.GetClientInfo(id);
@@ -68,6 +67,24 @@ namespace Planner.Services
         public void PutClientPhoto(int id, Client client)
         {
             _repo.PutClientPhoto(client);
+        }
+        public ClientsByDayDto GetClientsAndDay()
+        {
+            var dates = _repo.GetDates();
+
+            if (dates.Count == 0)
+                return null;
+
+            var datesString = new List<string>();
+            var clientscount = new List<int>();
+
+            foreach (var date in dates)
+            {
+                datesString.Add(date.ToString("d"));
+                clientscount.Add(_repo.GetClientCountByDate(date));
+            }
+
+            return new ClientsByDayDto { Count = clientscount, Date = datesString };
         }
     }
 }

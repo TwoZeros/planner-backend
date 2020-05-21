@@ -58,10 +58,7 @@ namespace Planner.Controllers
         [HttpGet("getRating")]
         public int GetRating(int id)
         {
-
             return _commentService.GetRating(id);
-
-
         }
 
         // PUT: api/Comments/5

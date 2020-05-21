@@ -29,6 +29,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Planner.Common\Planner.Common.csproj" />
     <ProjectReference Include="..\Planner.Data\Planner.Data.csproj" />
+    <ProjectReference Include="..\Planner.Models\Planner.Models.csproj" />
     <ProjectReference Include="..\Planner.Services.Contract\Planner.Services.Contract.csproj" />
     <ProjectReference Include="..\Planner.Services\Planner.Services.csproj" />
   </ItemGroup>

@@ -14,6 +14,8 @@ namespace Planner.Data.Contract.Repositories
         Task<Client> GetClientInfo(int id);
         void PutClient(Client employee);
         void PutClientPhoto(Client employee);
+        public List<DateTime> GetDates();
+        public int GetClientCountByDate(DateTime date);
     }
     
 }
