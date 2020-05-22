@@ -31,12 +31,12 @@ namespace Planner.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CarmaUser>>> GetCarmaUsers()
         {
-            return await _context.CarmaUsers.ToListAsync();
+            return await _context.CarmaUsers.OrderBy(p =>p.BeginCarma).ToListAsync();
         }
 
         // GET: api/CarmaUsers/5
         [HttpGet("GetCarmaByNumber/{number}")]
-        public async Task<ActionResult> GetEmployee(int number)
+        public async Task<ActionResult> GetCarmaByNumber(int number)
         {
             var carma = await _carmaUser.GetByNumber(number);
 
