@@ -13,7 +13,7 @@ namespace Planner.Services.Contract
     {
         public Task<ClientDetailDto> GetById(int id);
 
-        public List<ClientListDto> GetAll();
+        public Task<List<ClientListDto>> GetAll();
         public Task<string> Delete(int id);
 
         public Task AddClient(Client client);

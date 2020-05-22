@@ -28,10 +28,9 @@ namespace Planner.Controllers
 
         // GET: api/Client
         [HttpGet]
-        public List<ClientListDto> GetClients()
+        public async  Task<List<ClientListDto>> GetClients()
         {
-   
-        return _clientService.GetAll();
+            return await _clientService.GetAll();
         }
 
         // GET: api/Client/5

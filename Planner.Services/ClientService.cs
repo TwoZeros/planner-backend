@@ -17,15 +17,17 @@ namespace Planner.Services
     public class ClientService : IClientService
     {
         public IClientRepository _repo;
-
+        public ICommentRepository _commentRepo;
+        public ICarmaUser _carmaUser;
         private readonly IClientDetailMapper _detailMapper;
         private readonly IClientListMapper _listMapper;
-        public ClientService(IClientRepository repo, IClientDetailMapper detailMapper, IClientListMapper listMapper)
+        public ClientService(IClientRepository repo, IClientDetailMapper detailMapper, IClientListMapper listMapper, ICarmaUser carmaUser,ICommentRepository commentRepo)
         {
             _detailMapper = detailMapper;
             _listMapper = listMapper;
             _repo = repo;
-
+            _commentRepo = commentRepo;
+            _carmaUser = carmaUser;
         }
         public async Task<ClientDetailDto> GetById(int id)
         {
@@ -35,10 +37,20 @@ namespace Planner.Services
             return clientDto;
         }
 
-        public List<ClientListDto> GetAll()
+        public async Task<List<ClientListDto>> GetAll()
         {
-            var client = _repo.GetListClient();
-            return _listMapper.Map<List<Client>, List<ClientListDto>>(client);
+            var clientsDB = _repo.GetListClient();
+            var ClientsDto = _listMapper.Map<List<Client>, List<ClientListDto>>(clientsDB);
+            int ratingCount;
+
+            List<ClientListDto> clients = new List<ClientListDto>();
+            foreach(var elem in ClientsDto)
+            {
+                ratingCount = _commentRepo.GetListCommentWitnId(elem.Id).Sum(p =>p.Karma);
+                elem.Rating =await _carmaUser.GetByNumber(ratingCount);
+                clients.Add(elem);
+            }
+            return clients;
         }
 
         public async Task<string> Delete(int id)
