@@ -32,7 +32,7 @@ namespace Planner.Data.Repositories
 
         public async Task<List<WorkTimeInShedule>> GetDaysByShedyle(int id)
         {
-            return await _context.WorkTimeInChedules.Where(p => p.SheduleId == id).ToListAsync();
+            return await _context.WorkTimeInChedules.Where(p => p.SheduleId == id).OrderBy(p => p.Date).ToListAsync();
         }
 
     }
