@@ -16,5 +16,6 @@ namespace Planner.Services.Contract
         void Update(WorkTimeInShedule workTimeInShedule);
         public Task AddDaysShedule(WorkHoursCount workHoursCount, Shedule shedule);
         public int getHours(DateTime d, WorkHoursCount workHoursCount);
+        public Task<List<WorkTimeInSheduleDto>> GetDaysBySheduleId(int id);
     }
 }

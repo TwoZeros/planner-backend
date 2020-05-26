@@ -12,5 +12,7 @@ namespace Planner.Data.Contract.Repositories
         Task<List<WorkTimeInShedule>> GetAllWorkTimeInChedule();
 
         Task<WorkTimeInShedule> GetWorkTimeInCheduleInfo(int id);
+
+        Task<List<WorkTimeInShedule>> GetDaysByShedyle(int id);
     }
 }

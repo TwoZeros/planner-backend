@@ -98,5 +98,10 @@ namespace Planner.Services
             }
             return 0;
         }
+        public async Task<List<WorkTimeInSheduleDto>> GetDaysBySheduleId(int id)
+        {
+            var workTimeInShedule = await _repo.GetDaysByShedyle(id);
+            return _detailMapper.Map<List<WorkTimeInShedule>, List<WorkTimeInSheduleDto>>(workTimeInShedule);
+        }
     }
 }

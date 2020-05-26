@@ -4,6 +4,7 @@ using Planner.Data.Contract.Repositories;
 using Planner.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Planner.Data.Repositories
@@ -29,6 +30,10 @@ namespace Planner.Data.Repositories
                 .FirstOrDefaultAsync(f => f.Id == id);
         }
 
-        
+        public async Task<List<WorkTimeInShedule>> GetDaysByShedyle(int id)
+        {
+            return await _context.WorkTimeInChedules.Where(p => p.SheduleId == id).ToListAsync();
+        }
+
     }
 }
