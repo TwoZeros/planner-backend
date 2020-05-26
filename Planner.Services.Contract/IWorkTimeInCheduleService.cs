@@ -14,5 +14,7 @@ namespace Planner.Services.Contract
         Task<string> Delete(int id);
         Task Add(WorkTimeInShedule workTimeInShedule);
         void Update(WorkTimeInShedule workTimeInShedule);
+        public Task AddDaysShedule(WorkHoursCount workHoursCount, Shedule shedule);
+        public int getHours(DateTime d, WorkHoursCount workHoursCount);
     }
 }

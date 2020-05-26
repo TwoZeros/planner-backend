@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Planner.Data;
+using Planner.Data.Repositories;
 using Planner.Dto.Models;
 using Planner.Models;
 using Planner.Services;
 using Planner.Services.Contract;
 using Planner.Services.Contract.Dto;
+using Planner.Services.Infrastructure.Mappers;
 
 namespace Planner.Controllers
 {
@@ -91,19 +93,22 @@ namespace Planner.Controllers
 
             var shedule = _mapper.Map<SheduleModel, Shedule>(model);
 
-            var days = new List<WorkTimeInShedule>();
-
-
-            foreach (var it in model.workTimeInSheduleModels)
-            {
-                it.SheduleId = shedule.Id;
-                days.Add(_mapper.Map<WorkTimeInSheduleModel, WorkTimeInShedule>(it));
-            }
-
-
-            shedule.WorkTimeInShedules = days;
             await _sheduleService.Add(shedule);
 
+            var _wtisService = new WorkTimeInCheduleService(new WorkTimeInCheduleRepository(_context), new WorkTimeInSheduleDetailMapper());
+
+            await _wtisService.AddDaysShedule(model.workHoursCount, shedule);
+
+            //var days = new List<WorkTimeInShedule>();
+
+            //foreach (var it in model.workTimeInSheduleModels)
+            //{
+            //    it.SheduleId = shedule.Id;
+            //    days.Add(_mapper.Map<WorkTimeInSheduleModel, WorkTimeInShedule>(it));
+            //}
+
+            //shedule.WorkTimeInShedules = days;
+                    
             return CreatedAtAction("GetById", new { id = shedule.Id }, shedule);
         }
 
