@@ -12,6 +12,7 @@ services:
             dockerfile: Dockerfile
         ports:
             - "5050:5050"
+            - "44301:44301"
         volumes:
              - /etc/letsencrypt/:/etc/letsencrypt/
         links:
