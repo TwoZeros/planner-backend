@@ -24,11 +24,13 @@ namespace Planner.Controllers
         private readonly PlannerDbContext _context;
         private readonly ISheduleService _sheduleService;
         private readonly IMapper _mapper;
-        public ShedulesController(PlannerDbContext context, IMapper mapper, ISheduleService sheduleService)
+        private readonly IWorkTimeInCheduleService _workTimeService;
+        public ShedulesController(PlannerDbContext context, IMapper mapper, ISheduleService sheduleService, IWorkTimeInCheduleService workTimeService)
         {
             _context = context;
             _sheduleService = sheduleService;
             _mapper = mapper;
+            _workTimeService = workTimeService;
         }
 
         // GET: api/Skills
@@ -95,19 +97,10 @@ namespace Planner.Controllers
 
             await _sheduleService.Add(shedule);
 
-            var _wtisService = new WorkTimeInCheduleService(new WorkTimeInCheduleRepository(_context), new WorkTimeInSheduleDetailMapper());
+            
 
-            await _wtisService.AddDaysShedule(model.workHoursCount, shedule);
+            await _workTimeService.AddDaysShedule(model.workHoursCount, shedule);
 
-            //var days = new List<WorkTimeInShedule>();
-
-            //foreach (var it in model.workTimeInSheduleModels)
-            //{
-            //    it.SheduleId = shedule.Id;
-            //    days.Add(_mapper.Map<WorkTimeInSheduleModel, WorkTimeInShedule>(it));
-            //}
-
-            //shedule.WorkTimeInShedules = days;
                     
             return CreatedAtAction("GetById", new { id = shedule.Id }, shedule);
         }

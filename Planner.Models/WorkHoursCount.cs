@@ -6,7 +6,7 @@ namespace Planner.Models
 {
     public class WorkHoursCount
     {
-        public int Year { get; set; }
+        
         public int Monday { get; set; }
         public int Tuesday { get; set; }
         public int Wednesday { get; set; }

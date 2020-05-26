@@ -59,9 +59,9 @@ namespace Planner.Services
         {
             var list = new List<WorkTimeInShedule>();
 
-            var date = new DateTime(workHoursCount.Year, 1, 1);
+            var date = new DateTime(shedule.Year, 1, 1);
 
-            for (int i = 0; i < 337 + DateTime.DaysInMonth(workHoursCount.Year, 2); i++)
+            for (int i = 0; i < 337 + DateTime.DaysInMonth(shedule.Year, 2); i++)
             {
                 var wtis = new WorkTimeInShedule();
                 wtis.isHoliday = false;
