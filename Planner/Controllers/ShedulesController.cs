@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Planner.Data;
 using Planner.Dto.Models;
 using Planner.Models;
+using Planner.Services;
 using Planner.Services.Contract;
 using Planner.Services.Contract.Dto;
 
@@ -87,7 +88,20 @@ namespace Planner.Controllers
         [HttpPost]
         public async Task<ActionResult<Shedule>> PostShedule([FromBody]SheduleModel model)
         {
+
             var shedule = _mapper.Map<SheduleModel, Shedule>(model);
+
+            var days = new List<WorkTimeInShedule>();
+
+
+            foreach (var it in model.workTimeInSheduleModels)
+            {
+                it.SheduleId = shedule.Id;
+                days.Add(_mapper.Map<WorkTimeInSheduleModel, WorkTimeInShedule>(it));
+            }
+
+
+            shedule.WorkTimeInShedules = days;
             await _sheduleService.Add(shedule);
 
             return CreatedAtAction("GetById", new { id = shedule.Id }, shedule);
@@ -102,7 +116,7 @@ namespace Planner.Controllers
             {
                 return NotFound();
             }
-
+            
             return new JsonResult(status);
         }
 

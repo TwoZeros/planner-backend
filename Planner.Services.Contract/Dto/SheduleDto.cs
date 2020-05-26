@@ -9,5 +9,7 @@ namespace Planner.Services.Contract.Dto
         public int Id { get; set; }
         public string Name { get; set; }
         public string ContryCode { get; set; }
+
+        public List<WorkTimeInSheduleDto> workTimeInSheduleDtos { get; set; }
     }
 }

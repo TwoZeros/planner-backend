@@ -47,7 +47,7 @@ namespace Planner.Services
         }
         public async Task Add(Shedule shedule)
         {
-            _repo.Add(shedule);
+            _repo.AddInstance(shedule);
             await _repo.SaveAsync();
         }
 

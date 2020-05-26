@@ -20,7 +20,7 @@ namespace Planner.Services.Infrastructure.Mappers
                 cfg.CreateMap<WorkTimeInSheduleDto, WorkTimeInShedule>();
 
                 cfg.CreateMap<WorkTimeInShedule, WorkTimeInSheduleDto>()
-                .ForMember(x => x.SheduleName, s => s.MapFrom(x => x.Shedule.Name))
+                .ForMember(x => x.SheduleId, s => s.MapFrom(x => x.Shedule.Id))
                 .ForMember(x => x.Date, s => s.MapFrom(x => x.Date.ToString("d")));
             });
 

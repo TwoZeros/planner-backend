@@ -11,5 +11,7 @@ namespace Planner.Dto.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string ContryCode { get; set; }
+
+        public List<WorkTimeInSheduleModel> workTimeInSheduleModels { get; set; }
     }
 }

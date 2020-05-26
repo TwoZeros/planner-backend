@@ -1,5 +1,6 @@
 ﻿using Planner.Data.Contract.Base;
 using Planner.Models;
+using Planner.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,5 +13,7 @@ namespace Planner.Data.Contract.Repositories
         Task<List<Shedule>> GetAllShedule();
 
         Task<Shedule> GetSheduleInfo(int id);
+
+        void AddInstance(Shedule entity);
     }
 }
