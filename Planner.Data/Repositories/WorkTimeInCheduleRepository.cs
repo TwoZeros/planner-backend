@@ -34,6 +34,10 @@ namespace Planner.Data.Repositories
         {
             return await _context.WorkTimeInChedules.Where(p => p.SheduleId == id).OrderBy(p => p.Date).ToListAsync();
         }
-
+        public void DeleteShedules(Shedule shedule) 
+        {
+            var _shedule = _context.WorkTimeInChedules.Where(p => p.SheduleId == shedule.Id);
+            DeleteRange(_shedule);
+        }
     }
 }

@@ -14,5 +14,7 @@ namespace Planner.Data.Contract.Repositories
         Task<WorkTimeInShedule> GetWorkTimeInCheduleInfo(int id);
 
         Task<List<WorkTimeInShedule>> GetDaysByShedyle(int id);
+
+        void DeleteShedules(Shedule shedule);
     }
 }

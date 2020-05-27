@@ -13,6 +13,6 @@ namespace Planner.Services.Contract
         Task<List<SheduleDto>> GetAll();
         Task<string> Delete(int id);
         Task Add(Shedule skill);
-        void Update(Shedule skill);
+        Task Update(Shedule skill);
     }
 }

@@ -54,7 +54,11 @@ namespace Planner.Services
         {
             _repo.Update(workTimeInShedule);
         }
+        public void UpdateList(Shedule shedule)
+        {
+           // shedule.WorkTimeInShedules.Clear();
 
+        }
         public async Task AddDaysShedule(WorkHoursCount workHoursCount, Shedule shedule)
         {
             var list = new List<WorkTimeInShedule>();

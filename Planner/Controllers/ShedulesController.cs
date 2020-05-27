@@ -65,7 +65,8 @@ namespace Planner.Controllers
                 return BadRequest();
             }
             var shedule = _mapper.Map<SheduleModel, Shedule>(model);
-            _sheduleService.Update(shedule);
+           
+            await _sheduleService.Update(shedule);
 
             try
             {
@@ -97,11 +98,8 @@ namespace Planner.Controllers
 
             await _sheduleService.Add(shedule);
 
-            
-
             await _workTimeService.AddDaysShedule(model.workHoursCount, shedule);
-
-                    
+      
             return CreatedAtAction("GetById", new { id = shedule.Id }, shedule);
         }
 

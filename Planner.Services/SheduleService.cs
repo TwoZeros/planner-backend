@@ -16,10 +16,15 @@ namespace Planner.Services
 
         private readonly ISheduleDetailMapper _detailMapper;
 
-        public SheduleService(ISheduleRepository repo, ISheduleDetailMapper detailMapper)
+        private IWorkTimeInCheduleRepository _workRepo;
+
+        private IWorkTimeInCheduleService _workService;
+        public SheduleService(ISheduleRepository repo, ISheduleDetailMapper detailMapper, IWorkTimeInCheduleRepository workRepo, IWorkTimeInCheduleService workService)
         {
             _detailMapper = detailMapper;
             _repo = repo;
+            _workRepo = workRepo;
+            _workService = workService;
         }
         public async Task<SheduleDto> GetById(int id)
         {
@@ -51,9 +56,37 @@ namespace Planner.Services
             await _repo.SaveAsync();
         }
 
-        public void Update(Shedule shedule)
+        public async Task Update(Shedule shedule)
         {
+            
+            _workRepo.DeleteShedules(shedule);
+
             _repo.Update(shedule);
+
+            await _workService.AddDaysShedule(new WorkHoursCount()
+            {
+                Monday = shedule.Monday,
+                Thursday = shedule.Thursday,
+                Tuesday = shedule.Tuesday,
+                Wednesday = shedule.Wednesday,
+                Friday = shedule.Friday,
+                Saturday = shedule.Saturday,
+                Sunday = shedule.Sunday
+            }, shedule);
+        }
+
+        void RewriteDays(Shedule shedule)
+        {
+            _workService.AddDaysShedule(new WorkHoursCount()
+            {
+                Monday = shedule.Monday,
+                Thursday = shedule.Thursday,
+                Tuesday = shedule.Tuesday,
+                Wednesday = shedule.Wednesday,
+                Friday = shedule.Friday,
+                Saturday = shedule.Saturday,
+                Sunday = shedule.Sunday
+            }, shedule);
         }
     }
 }
