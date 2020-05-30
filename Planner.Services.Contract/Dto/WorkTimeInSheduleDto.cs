@@ -14,6 +14,6 @@ namespace Planner.Services.Contract.Dto
         public bool isHoliday { get; set; }
         public string HolidayName { get; set; }
         public int CountHours { get; set; }
-        public string SheduleName { get; set; }
+        public int SheduleId { get; set; }
     }
 }

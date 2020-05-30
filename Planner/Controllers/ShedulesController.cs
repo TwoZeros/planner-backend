@@ -7,10 +7,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Planner.Data;
+using Planner.Data.Repositories;
 using Planner.Dto.Models;
 using Planner.Models;
+using Planner.Services;
 using Planner.Services.Contract;
 using Planner.Services.Contract.Dto;
+using Planner.Services.Infrastructure.Mappers;
 
 namespace Planner.Controllers
 {
@@ -21,11 +24,13 @@ namespace Planner.Controllers
         private readonly PlannerDbContext _context;
         private readonly ISheduleService _sheduleService;
         private readonly IMapper _mapper;
-        public ShedulesController(PlannerDbContext context, IMapper mapper, ISheduleService sheduleService)
+        private readonly IWorkTimeInCheduleService _workTimeService;
+        public ShedulesController(PlannerDbContext context, IMapper mapper, ISheduleService sheduleService, IWorkTimeInCheduleService workTimeService)
         {
             _context = context;
             _sheduleService = sheduleService;
             _mapper = mapper;
+            _workTimeService = workTimeService;
         }
 
         // GET: api/Skills
@@ -87,9 +92,16 @@ namespace Planner.Controllers
         [HttpPost]
         public async Task<ActionResult<Shedule>> PostShedule([FromBody]SheduleModel model)
         {
+
             var shedule = _mapper.Map<SheduleModel, Shedule>(model);
+
             await _sheduleService.Add(shedule);
 
+            
+
+            await _workTimeService.AddDaysShedule(model.workHoursCount, shedule);
+
+                    
             return CreatedAtAction("GetById", new { id = shedule.Id }, shedule);
         }
 
@@ -102,7 +114,7 @@ namespace Planner.Controllers
             {
                 return NotFound();
             }
-
+            
             return new JsonResult(status);
         }
 

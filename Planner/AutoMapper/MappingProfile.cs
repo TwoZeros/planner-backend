@@ -44,7 +44,14 @@ namespace Planner.AutoMapper
 
             CreateMap<WorkTimeInSheduleModel, WorkTimeInShedule>();
 
-            CreateMap<SheduleModel, Shedule>();
+            CreateMap<SheduleModel, Shedule>()
+                  .ForMember(x => x.Monday, s => s.MapFrom(x => x.workHoursCount.Monday))
+                  .ForMember(x => x.Tuesday, s => s.MapFrom(x => x.workHoursCount.Tuesday))
+                  .ForMember(x => x.Saturday, s => s.MapFrom(x => x.workHoursCount.Saturday))
+                  .ForMember(x => x.Wednesday, s => s.MapFrom(x => x.workHoursCount.Wednesday))
+                  .ForMember(x => x.Sunday, s => s.MapFrom(x => x.workHoursCount.Sunday))
+                   .ForMember(x => x.Friday, s => s.MapFrom(x => x.workHoursCount.Friday))
+                  .ForMember(x => x.Thursday, s => s.MapFrom(x => x.workHoursCount.Thursday));
 
             CreateMap<LackOfEmployeeModel, LackOfEmployee>();
 

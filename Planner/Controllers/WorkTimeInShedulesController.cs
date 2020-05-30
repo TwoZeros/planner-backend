@@ -49,6 +49,18 @@ namespace Planner.Controllers
             return new JsonResult(workTimeInShedule);
         }
 
+        [HttpGet("getAllDaysInShedule/shedule/{id}")]
+        public async Task<ActionResult> GetAllDaysInSheduleById(int id)
+        {
+            var workTimeInShedule = await _workTimeInSheduleService.GetDaysBySheduleId(id);
+
+            if (workTimeInShedule == null)
+            {
+                return NotFound();
+            }
+
+            return new JsonResult(workTimeInShedule);
+        }
         // PUT: api/Products/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
