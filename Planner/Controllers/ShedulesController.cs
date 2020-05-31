@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Planner.Data;
-using Planner.Data.Repositories;
 using Planner.Dto.Models;
 using Planner.Models;
-using Planner.Services;
 using Planner.Services.Contract;
 using Planner.Services.Contract.Dto;
-using Planner.Services.Infrastructure.Mappers;
 
 namespace Planner.Controllers
 {
@@ -54,6 +49,16 @@ namespace Planner.Controllers
             return new JsonResult(shedule);
         }
 
+        [HttpGet("holidaysInShedule/{id}")]
+        public async Task<ActionResult> GetHolidays(int id)
+        {
+            var holidays = await _sheduleService.GetHolidays(id);
+            if (holidays == null)
+            {
+                return NotFound();
+            }
+            return new JsonResult(holidays);
+        }
         // PUT: api/Products/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
@@ -66,7 +71,7 @@ namespace Planner.Controllers
             }
             var shedule = _mapper.Map<SheduleModel, Shedule>(model);
            
-            await _sheduleService.Update(shedule);
+            await _sheduleService.Update(shedule, model.Holidays);
 
             try
             {
@@ -98,7 +103,7 @@ namespace Planner.Controllers
 
             await _sheduleService.Add(shedule);
 
-            await _workTimeService.AddDaysShedule(model.workHoursCount, shedule);
+            await _workTimeService.AddDaysShedule(model.workHoursCount, shedule, model.Holidays);
       
             return CreatedAtAction("GetById", new { id = shedule.Id }, shedule);
         }

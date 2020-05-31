@@ -12,8 +12,8 @@ namespace Planner.Services.Contract
         Task<HolidaysDto> GetById(int id);
         Task<List<HolidaysDto>> GetAll();
         Task<string> Delete(int id);
-        Task Add(Holidays skill);
-        void Update(Holidays skill);
+        Task Add(Models.Holidays skill);
+        void Update(Models.Holidays skill);
 
     }
 }

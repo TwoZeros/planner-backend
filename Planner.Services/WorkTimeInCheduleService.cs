@@ -5,6 +5,7 @@ using Planner.Services.Contract.Dto;
 using Planner.Services.Infrastructure.Mappers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Planner.Services
@@ -59,7 +60,7 @@ namespace Planner.Services
            // shedule.WorkTimeInShedules.Clear();
 
         }
-        public async Task AddDaysShedule(WorkHoursCount workHoursCount, Shedule shedule)
+        public async Task AddDaysShedule(WorkHoursCount workHoursCount, Shedule shedule, Holiday[] holidays)
         {
             var list = new List<WorkTimeInShedule>();
 
@@ -77,8 +78,26 @@ namespace Planner.Services
                 //_repo.Add(wtis);
                 list.Add(wtis);
             }
-            _repo.AddRange(list);
+
+            IEnumerable<WorkTimeInShedule> dayslist = list;
+
+            AddHolidays(dayslist, holidays);
+
+            _repo.AddRange(dayslist);
             await _repo.SaveAsync();
+        }
+
+        public void AddHolidays(IEnumerable<WorkTimeInShedule> dayslist, Holiday[] holidays)
+        {
+            foreach (var it in holidays)
+            {
+                var day = dayslist.FirstOrDefault(p => p.Date.Date == it.Date.Date);
+                if (day != null)
+                {
+                    day.isHoliday = true;
+                    day.HolidayName = it.Name;
+                }
+            }
         }
 
         public int getHours(DateTime d, WorkHoursCount workHoursCount)

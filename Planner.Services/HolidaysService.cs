@@ -24,14 +24,14 @@ namespace Planner.Services
         public async Task<HolidaysDto> GetById(int id)
         {
             var holidays = await _repo.GetHolidaysInfo(id);
-            var holidaysDto = _detailMapper.Map<Holidays, HolidaysDto>(holidays);
+            var holidaysDto = _detailMapper.Map<Models.Holidays, HolidaysDto>(holidays);
 
             return holidaysDto;
         }
         public async Task<List<HolidaysDto>> GetAll()
         {
             var holidays = await _repo.GetAllHolidays();
-            return _detailMapper.Map<List<Holidays>, List<HolidaysDto>>(holidays);
+            return _detailMapper.Map<List<Models.Holidays>, List<HolidaysDto>>(holidays);
         }
 
         public async Task<string> Delete(int id)
@@ -45,13 +45,13 @@ namespace Planner.Services
             }
             return "Not Found";
         }
-        public async Task Add(Holidays holidays)
+        public async Task Add(Models.Holidays holidays)
         {
             _repo.Add(holidays);
             await _repo.SaveAsync();
         }
 
-        public void Update(Holidays holidays)
+        public void Update(Models.Holidays holidays)
         {
             _repo.Update(holidays);
         }

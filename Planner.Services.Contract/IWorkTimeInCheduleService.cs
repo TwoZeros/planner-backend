@@ -14,9 +14,11 @@ namespace Planner.Services.Contract
         Task<string> Delete(int id);
         Task Add(WorkTimeInShedule workTimeInShedule);
         void Update(WorkTimeInShedule workTimeInShedule);
-        public Task AddDaysShedule(WorkHoursCount workHoursCount, Shedule shedule);
+        public Task AddDaysShedule(WorkHoursCount workHoursCount, Shedule shedule, Contract.Holiday[] holidays);
         public int getHours(DateTime d, WorkHoursCount workHoursCount);
         public Task<List<WorkTimeInSheduleDto>> GetDaysBySheduleId(int id);
         public void UpdateList(Shedule shedule);
+        void AddHolidays(IEnumerable<WorkTimeInShedule> dayslist, Contract.Holiday[] holidays);
+
     }
 }

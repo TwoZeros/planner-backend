@@ -2,6 +2,7 @@
 using Planner.Data.Base;
 using Planner.Data.Contract.Repositories;
 using Planner.Models;
+using Planner.Services.Contract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +39,10 @@ namespace Planner.Data.Repositories
         {
             var _shedule = _context.WorkTimeInChedules.Where(p => p.SheduleId == shedule.Id);
             DeleteRange(_shedule);
+        }
+        public async Task<List<WorkTimeInShedule>> GetHolidaysInfo(int id)
+        {
+            return await _context.WorkTimeInChedules.Where(p => p.isHoliday == true && p.SheduleId == id).ToListAsync();
         }
     }
 }
