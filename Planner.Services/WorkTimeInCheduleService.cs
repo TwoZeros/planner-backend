@@ -96,6 +96,7 @@ namespace Planner.Services
                 {
                     day.isHoliday = true;
                     day.HolidayName = it.Name;
+                    day.CountHours = 0;
                 }
             }
         }
