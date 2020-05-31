@@ -10,5 +10,7 @@ namespace Planner.Dto.Models
         public int Id { get; set; }
         public int SheduleId { get; set; }
         public int EmployeeId { get; set; }
+        public DateTime Begin { get; set; }
+        public DateTime End { get; set; }
     }
 }
