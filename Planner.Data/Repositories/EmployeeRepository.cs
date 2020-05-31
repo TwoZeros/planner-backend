@@ -51,7 +51,7 @@ namespace Planner.Data.Repositories
 
         public List<Employee> GetListEmployee()
         {
-            return  _context.Employees.Include(p => p.User).Include(p => p.Depatamnet).ToList();
+            return  _context.Employees.Include(p => p.Depatamnet).ToList();
         }
 
     }

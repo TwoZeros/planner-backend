@@ -10,6 +10,7 @@ namespace Planner.Data.Contract.Repositories
     public interface IEmployeeSheduleRepository : IBaseRepository<EmployeeShedule>
     {
         Task<List<EmployeeShedule>> GetAllEmployeeShedule();
+        Task<List<EmployeeShedule>> GetSchedulesByEmployeeId(int Id);
 
         Task<EmployeeShedule> GetEmployeeSheduleInfo(int id);
     }

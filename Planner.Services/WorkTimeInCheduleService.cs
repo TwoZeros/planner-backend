@@ -63,7 +63,7 @@ namespace Planner.Services
         public async Task AddDaysShedule(WorkHoursCount workHoursCount, Shedule shedule, Holiday[] holidays)
         {
             var list = new List<WorkTimeInShedule>();
-
+            //IEnumerable<WorkTimeInShedule> list = new WorkTimeInShedule[] { };
             var date = new DateTime(shedule.Year, 1, 1);
 
             for (int i = 0; i < 337 + DateTime.DaysInMonth(shedule.Year, 2); i++)
@@ -77,6 +77,7 @@ namespace Planner.Services
                 date = date.AddDays(1);
                 //_repo.Add(wtis);
                 list.Add(wtis);
+
             }
 
             IEnumerable<WorkTimeInShedule> dayslist = list;
@@ -84,6 +85,7 @@ namespace Planner.Services
             AddHolidays(dayslist, holidays);
 
             _repo.AddRange(dayslist);
+
             await _repo.SaveAsync();
         }
 

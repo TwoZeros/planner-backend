@@ -49,6 +49,19 @@ namespace Planner.Controllers
             return new JsonResult(employeeShedule);
         }
 
+        [HttpGet("employee/{id}")]
+        public async Task<ActionResult> GetByEmployeeId(int id)
+        {
+            var employeeShedule = await _employeeSheduleService.GetSchedulesByEmployeeId(id);
+
+            if (employeeShedule == null)
+            {
+                return NotFound();
+            }
+
+            return new JsonResult(employeeShedule);
+        }
+
         // PUT: api/Products/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
@@ -85,7 +98,7 @@ namespace Planner.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<EmployeeShedule>> PostSkill([FromBody]EmployeeSheduleModel model)
+        public async Task<ActionResult<EmployeeShedule>> PostEmployeeSchedule([FromBody]EmployeeSheduleModel model)
         {
             var employeeShedule = _mapper.Map<EmployeeSheduleModel, EmployeeShedule>(model);
             await _employeeSheduleService.Add(employeeShedule);
@@ -93,7 +106,7 @@ namespace Planner.Controllers
             return CreatedAtAction("GetById", new { id = employeeShedule.Id }, employeeShedule);
         }
 
-        // DELETE: api/Products/5
+        // DELETE: api/EmployeeSchedule/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<EmployeeShedule>> DeleteEmployeeShedule(int id)
         {

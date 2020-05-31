@@ -10,6 +10,7 @@ namespace Planner.Services.Contract
     public interface IEmployeeSheduleService
     {
         Task<EmployeeSheduleDto> GetById(int id);
+        Task<List<EmployeeSheduleDto>> GetSchedulesByEmployeeId(int id);
         Task<List<EmployeeSheduleDto>> GetAll();
         Task<string> Delete(int id);
         Task Add(EmployeeShedule employeeShedule);

@@ -34,6 +34,12 @@ namespace Planner.Services
             return _detailMapper.Map<List<EmployeeShedule>, List<EmployeeSheduleDto>>(employeeShedule);
         }
 
+        public async Task<List<EmployeeSheduleDto>> GetSchedulesByEmployeeId(int Id)
+        {
+            var employeeShedule = await _repo.GetSchedulesByEmployeeId(Id);
+            return _detailMapper.Map<List<EmployeeShedule>, List<EmployeeSheduleDto>>(employeeShedule);
+        }
+
         public async Task<string> Delete(int id)
         {
             var employeeShedule = await _repo.GetById(id);
