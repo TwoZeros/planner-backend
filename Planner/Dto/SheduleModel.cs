@@ -1,11 +1,10 @@
-﻿using Planner.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Planner.Models;
 
 namespace Planner.Dto.Models
-
 {
     public class SheduleModel
     {
@@ -14,5 +13,6 @@ namespace Planner.Dto.Models
         public string ContryCode { get; set; }
         public int Year { get; set; }
         public WorkHoursCount workHoursCount { get; set; }
+        public Services.Contract.Holiday[] Holidays { get; set; }
     }
 }

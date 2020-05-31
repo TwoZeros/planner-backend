@@ -1,5 +1,6 @@
 ﻿using Planner.Data.Contract.Base;
 using Planner.Models;
+using Planner.Services.Contract;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,5 +17,6 @@ namespace Planner.Data.Contract.Repositories
         Task<List<WorkTimeInShedule>> GetDaysByShedyle(int id);
 
         void DeleteShedules(Shedule shedule);
+        Task<List<WorkTimeInShedule>> GetHolidaysInfo(int id);
     }
 }

@@ -59,7 +59,7 @@ namespace Planner.Controllers
             {
                 return BadRequest();
             }
-            var holidays = _mapper.Map<HolidaysModel, Holidays>(model);
+            var holidays = _mapper.Map<HolidaysModel, Models.Holidays>(model);
             _holidaysService.Update(holidays);
 
             try
@@ -85,9 +85,9 @@ namespace Planner.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Holidays>> PostHolidays([FromBody]HolidaysModel model)
+        public async Task<ActionResult<Models.Holidays>> PostHolidays([FromBody]HolidaysModel model)
         {
-            var holidays = _mapper.Map<HolidaysModel, Holidays>(model);
+            var holidays = _mapper.Map<HolidaysModel, Models.Holidays>(model);
             await _holidaysService.Add(holidays);
 
             return CreatedAtAction("GetById", new { id = holidays.Id }, holidays);
@@ -95,7 +95,7 @@ namespace Planner.Controllers
 
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Holidays>> DeleteHolidays(int id)
+        public async Task<ActionResult<Models.Holidays>> DeleteHolidays(int id)
         {
             var status = await _holidaysService.Delete(id);
             if (status == null)

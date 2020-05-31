@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Planner.Models\Planner.Models.csproj" />
+    <ProjectReference Include="..\Planner.Services.Contract\Planner.Services.Contract.csproj" />
   </ItemGroup>
 
 </Project>

@@ -56,7 +56,7 @@ namespace Planner.Services
             await _repo.SaveAsync();
         }
 
-        public async Task Update(Shedule shedule)
+        public async Task Update(Shedule shedule, Contract.Holiday[] holidays)
         {
             
             _workRepo.DeleteShedules(shedule);
@@ -72,21 +72,11 @@ namespace Planner.Services
                 Friday = shedule.Friday,
                 Saturday = shedule.Saturday,
                 Sunday = shedule.Sunday
-            }, shedule);
+            }, shedule, holidays);
         }
-
-        void RewriteDays(Shedule shedule)
+        public async Task<List<WorkTimeInShedule>> GetHolidays(int id)
         {
-            _workService.AddDaysShedule(new WorkHoursCount()
-            {
-                Monday = shedule.Monday,
-                Thursday = shedule.Thursday,
-                Tuesday = shedule.Tuesday,
-                Wednesday = shedule.Wednesday,
-                Friday = shedule.Friday,
-                Saturday = shedule.Saturday,
-                Sunday = shedule.Sunday
-            }, shedule);
+            return await _workRepo.GetHolidaysInfo(id);
         }
     }
 }

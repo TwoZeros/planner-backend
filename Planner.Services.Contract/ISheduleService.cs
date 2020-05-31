@@ -13,6 +13,7 @@ namespace Planner.Services.Contract
         Task<List<SheduleDto>> GetAll();
         Task<string> Delete(int id);
         Task Add(Shedule skill);
-        Task Update(Shedule skill);
+        Task Update(Shedule skill, Contract.Holiday[] holidays);
+        Task<List<WorkTimeInShedule>> GetHolidays(int id);
     }
 }
